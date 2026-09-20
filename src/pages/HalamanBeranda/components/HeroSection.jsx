@@ -22,7 +22,8 @@ export function HeroSection() {
         })
 
         gsap.to("#hero-profile", {
-            y: -55,
+            y: 30,
+            opacity: 0,
             scrollTrigger: {
                 trigger: "#hero",
                 start: "top top",
@@ -40,12 +41,14 @@ export function HeroSection() {
                 scrub: true,
             }
         })
+
+
     }, [])
 
     return (
         <section id="hero" className="flex flex-col items-center justify-between h-screen py-16 cursor-default">
             <span></span>
-            <div className="flex flex-col max-w-full">
+            <div id="hero-title" className="flex flex-col max-w-full">
                 <div className="flex justify-between px-32">
                     <div className="flex justify-center gap-16">
                         <span className="font-semibold text-2xl">PENGEMBANG WEB</span>
@@ -70,8 +73,8 @@ export function HeroSection() {
                 <span id="based" className="font-medium text-2xl">BASED IN INDONESIA</span>
                 <ChevronDownIcon className="chevron" />
             </div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[-9999]">
-                <img src={Hero} alt="Hero Section Profile" id="hero-profile" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[-9999] overflow-hidden flex items-center justify-center">
+                <img src={Hero} alt="Hero Section Profile" id="hero-profile" className="scale-110" />
             </div>
         </section>
     )
