@@ -33,7 +33,7 @@ export function KaryaSection() {
     })
 
     return (
-        <section id="karya-terpilih" className="flex flex-col justify-center items-center gap-4">
+        <section id="karya-terpilih" className="flex flex-col justify-center items-center gap-4 mb-64">
             <div className="p-4 pb-0 w-full h-[125vh]">
                 <div className="relative w-full h-full overflow-hidden rounded-sm">
                     <img id="top-work" src={Placeholder} alt="" className="w-full h-full object-cover scale-125" />

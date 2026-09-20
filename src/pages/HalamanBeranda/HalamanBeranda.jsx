@@ -3,6 +3,7 @@ import { AboutMeSection } from './components/AboutMeSection'
 import { PencapaianSection } from './components/PencapaianSection'
 import { LayananSayaSection } from './components/LayananSayaSection'
 import { KaryaSection } from './components/KaryaSection'
+import { ProsesSection } from './components/ProsesSection'
 import './HalamanBeranda.css'
 
 export function HalamanBeranda() {
@@ -13,6 +14,7 @@ export function HalamanBeranda() {
             <PencapaianSection />
             <LayananSayaSection />
             <KaryaSection />
+            <ProsesSection />
         </main>
 
     )

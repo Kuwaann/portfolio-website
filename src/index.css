@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --font-crimson-text: 'Crimson Text', sans-serif;
+}
+
 @utility bg-primary-gradient {
   background-image: linear-gradient(to bottom, #A6FF28, #95FF00)
 }
