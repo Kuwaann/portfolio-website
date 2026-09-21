@@ -11,6 +11,7 @@ export function ProcessCard({ process, index }) {
     const formattedIndex = index.toString().padStart(2, "0");
 
     useGSAP(() => {
+        gsap.set(cardRef.current, { paddingBottom: 32 });
         gsap.to(cardRef.current, {
             scrollTrigger: {
                 trigger: cardRef.current,
@@ -18,7 +19,7 @@ export function ProcessCard({ process, index }) {
                 start: 'top top',
                 end: 'bottom top'
             },
-            paddingBottom: '1rem',
+            paddingBottom: 0,
             opacity: 0.2
         })
 
