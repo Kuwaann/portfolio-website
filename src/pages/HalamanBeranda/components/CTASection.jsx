@@ -11,7 +11,7 @@ export function CTASection() {
                 </div>
                 <span className="font-semibold text-9xl">)</span>
             </div>
-            <Button className="bg-primary-gradient">Wujudkan Ide Anda!</Button>
+            <Button>Wujudkan Ide Anda!</Button>
         </section>
     )
 }

@@ -48,7 +48,7 @@ export function KaryaSection() {
                         </div>
                         <div id="top-work-right" className="w-xl flex flex-col gap-4 items-end">
                             <p className="text-2xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eveniet sunt nobis reiciendis incidunt, ipsa mollitia eligendi neque distinctio asperiores provident culpa excepturi molestias deserunt quo, doloribus accusamus aut dignissimos?</p>
-                            <Button id="about-button">Pelajari Lebih Lanjut</Button>
+                            <Button id="about-button" variant="secondary">Pelajari Lebih Lanjut</Button>
                         </div>
                     </div>
                 </div>
