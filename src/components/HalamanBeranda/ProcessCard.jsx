@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import Placeholder from '../../assets/skillsetplaceholder.jpg'
+import Placeholder from '../../assets/imgplaceholder.jpg'
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 

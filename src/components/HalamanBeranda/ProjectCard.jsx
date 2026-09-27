@@ -1,13 +1,13 @@
 import { cn } from '../../lib/utils'
 import gsap from 'gsap'
-import Placeholder from '../../assets/skillsetplaceholder.jpg'
 import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { EyeIcon } from 'lucide-react'
 
-export function ProjectCard({ id = "", className = "" }) {
+export function ProjectCard({ className = "", project }) {
     const cardRef = useRef(null);
     const imgRef = useRef(null);
+    const imgContainerRef = useRef(null);
     const buttonRef = useRef(null);
 
     const xTo = useRef(null);
@@ -24,7 +24,7 @@ export function ProjectCard({ id = "", className = "" }) {
             yTo.current?.(y, y);
         }
 
-        gsap.to(imgRef.current, {
+        gsap.to(imgContainerRef.current, {
             scale: 0.95,
             duration: 0.5,
             ease: 'circ.inOut'
@@ -40,7 +40,7 @@ export function ProjectCard({ id = "", className = "" }) {
     }
 
     const handleMouseLeave = () => {
-        gsap.to(imgRef.current, {
+        gsap.to(imgContainerRef.current, {
             scale: 1,
             duration: 0.5,
             ease: 'circ.inOut'
@@ -67,16 +67,15 @@ export function ProjectCard({ id = "", className = "" }) {
     };
 
     useGSAP(() => {
-        gsap.fromTo(`#${id}`,
-            { y: -100 },
+        gsap.to(imgRef.current,
             {
                 scrollTrigger: {
-                    trigger: `#${id}`,
+                    trigger: imgRef.current,
                     scrub: true,
                     start: "top bottom",
                     end: "bottom top"
                 },
-                y: 100,
+                yPercent: 30,
                 ease: 'none'
             }
         )
@@ -94,8 +93,8 @@ export function ProjectCard({ id = "", className = "" }) {
 
     return (
         <div className={cn("rounded-sm flex-1 bg-primary-gradient overflow-hidden flex justify-center items-center relative cursor-pointer", className)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove} ref={cardRef} >
-            <div className="flex justify-center items-center w-full h-full bg-amber-400 flex-1 overflow-hidden" ref={imgRef}>
-                <img id={id} src={Placeholder} alt="Project Number 2" className="object-cover w-full h-full scale-150" />
+            <div className="flex justify-center items-center w-full h-full bg-primary-gradient flex-1 overflow-hidden" ref={imgContainerRef}>
+                <img src={project.img} alt="Project Card" className="object-cover w-full h-full scale-150" ref={imgRef} />
             </div>
             <div className="absolute top-0 left-0 -translate-x-full -translate-y-full z-20 bg-white px-4 py-2 rounded-sm text-lg flex items-center justify-center whitespace-nowrap pointer-events-none font-semibold text-black shadow-lg gap-2" ref={buttonRef}>
                 <EyeIcon />

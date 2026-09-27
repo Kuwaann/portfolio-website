@@ -1,9 +1,10 @@
 import { useGSAP } from '@gsap/react'
-import Placeholder from '../../../assets/skillsetplaceholder.jpg'
+import Placeholder from '../../../assets/imgplaceholder.jpg'
 import gsap from 'gsap'
 import { Button } from '../../../components/Button'
 import { ProjectCard } from '../../../components/HalamanBeranda/ProjectCard'
 import { Badge } from '../../../components/Badge'
+import { projects } from '../../../../constants/index'
 
 export function KaryaSection() {
     useGSAP(() => {
@@ -54,8 +55,11 @@ export function KaryaSection() {
                 </div>
             </div>
             <div className="flex items-start gap-4 px-4">
-                <ProjectCard id='top-work-2' className='h-screen' />
-                <ProjectCard id='top-work-3' className='h-[75vh]' />
+                {projects.map((project, index) => {
+                    if (index > 1) return;
+                    if (index === 0) return <ProjectCard key={project.title} project={project} className="h-screen" />
+                    if (index === 1) return <ProjectCard key={project.title} project={project} className="h-[75vh]" />
+                })}
             </div>
         </section>
     )

@@ -2,7 +2,7 @@ import { useGSAP } from "@gsap/react"
 import { useRef } from "react";
 import gsap from "gsap";
 import { Badge } from "../Badge";
-import Placeholder from '../../assets/skillsetplaceholder.jpg'
+import Placeholder from '../../assets/imgplaceholder.jpg'
 
 export function SkillsetCard({ index, skillset }) {
     const cardRef = useRef(null);
@@ -80,7 +80,7 @@ export function SkillsetCard({ index, skillset }) {
                 yPercent: 100,
                 opacity: 0,
             })
-            .from("div div span", {
+            .from("div div div span", {
                 yPercent: 100,
                 opacity: 0,
                 stagger: 0.05,

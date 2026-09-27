@@ -1,3 +1,7 @@
+import Placeholder from '../src/assets/imgplaceholder.jpg'
+import Placeholder2 from '../src/assets/imgplaceholder2.jpg'
+import { slugify } from '../src/lib/utils'
+
 const skillsets = [
     {
         name: 'Pengembangan Web',
@@ -40,7 +44,67 @@ const processes = [
     }
 ]
 
+const projects = [
+    {
+        title: "6Packs Mobile App - A Fitness Application",
+        slug: slugify("6Packs Mobile App - A Fitness Application"),
+        client: "Client's Name 1",
+        tags: ["Tag 1", "Tag 2", "Tag 3"],
+        img: Placeholder
+    },
+    {
+        title: "Otho Metronik Landing Page",
+        slug: slugify("Otho Metronik Landing Page"),
+        client: "Client's Name 2",
+        tags: ["Tag 4", "Tag 5", "Tag 6"],
+        img: Placeholder2
+    },
+    {
+        title: "Website Perhitungan Ekonomi Lapangan Migas",
+        slug: slugify("Website Perhitungan Ekonomi Lapangan Migas"),
+        client: "Client's Name 3",
+        tags: ["Tag 7", "Tag 8", "Tag 9"],
+        img: Placeholder
+    },
+    {
+        title: "Otho Metronik Landing Page",
+        slug: slugify("Otho Metronik Landing Page"),
+        client: "Client's Name 2",
+        tags: ["Tag 4", "Tag 5", "Tag 6"],
+        img: Placeholder2
+    },
+    {
+        title: "Website Perhitungan Ekonomi Lapangan Migas",
+        slug: slugify("Website Perhitungan Ekonomi Lapangan Migas"),
+        client: "Client's Name 3",
+        tags: ["Tag 7", "Tag 8", "Tag 9"],
+        img: Placeholder
+    },
+    {
+        title: "Website Perhitungan Ekonomi Lapangan Migas",
+        slug: slugify("Website Perhitungan Ekonomi Lapangan Migas"),
+        client: "Client's Name 3",
+        tags: ["Tag 7", "Tag 8", "Tag 9"],
+        img: Placeholder
+    },
+    {
+        title: "Website Perhitungan Ekonomi Lapangan Migas",
+        slug: slugify("Website Perhitungan Ekonomi Lapangan Migas"),
+        client: "Client's Name 3",
+        tags: ["Tag 7", "Tag 8", "Tag 9"],
+        img: Placeholder
+    },
+    {
+        title: "Website Perhitungan Ekonomi Lapangan Migas",
+        slug: slugify("Website Perhitungan Ekonomi Lapangan Migas"),
+        client: "Client's Name 3",
+        tags: ["Tag 7", "Tag 8", "Tag 9"],
+        img: Placeholder
+    },
+]
+
 export {
     skillsets,
-    processes
+    processes,
+    projects
 }
