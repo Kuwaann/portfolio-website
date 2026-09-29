@@ -92,7 +92,7 @@ export function SkillsetCard({ index, skillset }) {
             <div className="skillset flex gap-4 py-8 group px-8">
                 <span className="skillset-number font-medium text-2xl text-white/25">[{formattedIndex}]</span>
                 <div className="flex flex-col gap-2.5 group-hover:translate-x-2 transition ease-in-out flex-1 items-start">
-                    <h3 className="font-medium text-7xl">{skillset.name}</h3>
+                    <h3 className="text-7xl">{skillset.name}</h3>
                     <div className="flex gap-2.5">
                         {skillset.skills.map((skill) => (
                             <Badge key={skill}>{skill}</Badge>

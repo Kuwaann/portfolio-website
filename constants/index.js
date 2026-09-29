@@ -46,65 +46,65 @@ const processes = [
 
 const projects = [
     {
-        title: "6Packs Mobile App - A Fitness Application",
-        slug: slugify("6Packs Mobile App - A Fitness Application"),
-        client: "Client's Name 1",
-        tags: ["Tag 1", "Tag 2", "Tag 3"],
-        img: Placeholder
+        title: "6Packs",
+        slug: slugify("6Packs"),
+        client: "Self Project",
+        year: 2026,
+        tags: ["Tag 1", "Tag 2", "Tag 3", "Tag 4"],
+        img: [Placeholder, Placeholder2, Placeholder, Placeholder2],
+        description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, animi modi. Odit necessitatibus nemo facilis provident beatae mollitia vitae unde voluptates iusto, repellat harum illum ipsa dolore numquam aspernatur iure!"
     },
     {
         title: "Otho Metronik Landing Page",
         slug: slugify("Otho Metronik Landing Page"),
-        client: "Client's Name 2",
+        client: "PT Otho Metronik Indonesia",
+        year: 2026,
         tags: ["Tag 4", "Tag 5", "Tag 6"],
-        img: Placeholder2
+        img: [Placeholder2, Placeholder, Placeholder2, Placeholder],
+        description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, animi modi. Odit necessitatibus nemo facilis provident beatae mollitia vitae unde voluptates iusto, repellat harum illum ipsa dolore numquam aspernatur iure!"
     },
     {
-        title: "Website Perhitungan Ekonomi Lapangan Migas",
-        slug: slugify("Website Perhitungan Ekonomi Lapangan Migas"),
-        client: "Client's Name 3",
+        title: "Petrostream",
+        slug: slugify("Petrostream"),
+        client: "Self Project",
+        year: 2026,
         tags: ["Tag 7", "Tag 8", "Tag 9"],
-        img: Placeholder
+        img: [Placeholder, Placeholder2, Placeholder, Placeholder2],
+        description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, animi modi. Odit necessitatibus nemo facilis provident beatae mollitia vitae unde voluptates iusto, repellat harum illum ipsa dolore numquam aspernatur iure!"
     },
     {
-        title: "Otho Metronik Landing Page",
-        slug: slugify("Otho Metronik Landing Page"),
-        client: "Client's Name 2",
+        title: "Dusun Jetis Jamuskauman",
+        slug: slugify("Dusun Jetis Jamuskauman"),
+        client: "Dusun Jetis Jamuskauman",
+        year: 2026,
         tags: ["Tag 4", "Tag 5", "Tag 6"],
-        img: Placeholder2
+        img: [Placeholder2, Placeholder, Placeholder2, Placeholder],
+        description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, animi modi. Odit necessitatibus nemo facilis provident beatae mollitia vitae unde voluptates iusto, repellat harum illum ipsa dolore numquam aspernatur iure!"
     },
     {
-        title: "Website Perhitungan Ekonomi Lapangan Migas",
-        slug: slugify("Website Perhitungan Ekonomi Lapangan Migas"),
-        client: "Client's Name 3",
+        title: "Dummy Bank BKC",
+        slug: slugify("Dummy Bank BKC"),
+        client: "Self Project",
+        year: 2026,
         tags: ["Tag 7", "Tag 8", "Tag 9"],
-        img: Placeholder
-    },
-    {
-        title: "Website Perhitungan Ekonomi Lapangan Migas",
-        slug: slugify("Website Perhitungan Ekonomi Lapangan Migas"),
-        client: "Client's Name 3",
-        tags: ["Tag 7", "Tag 8", "Tag 9"],
-        img: Placeholder
-    },
-    {
-        title: "Website Perhitungan Ekonomi Lapangan Migas",
-        slug: slugify("Website Perhitungan Ekonomi Lapangan Migas"),
-        client: "Client's Name 3",
-        tags: ["Tag 7", "Tag 8", "Tag 9"],
-        img: Placeholder
-    },
-    {
-        title: "Website Perhitungan Ekonomi Lapangan Migas",
-        slug: slugify("Website Perhitungan Ekonomi Lapangan Migas"),
-        client: "Client's Name 3",
-        tags: ["Tag 7", "Tag 8", "Tag 9"],
-        img: Placeholder
+        img: [Placeholder, Placeholder2, Placeholder, Placeholder2],
+        description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, animi modi. Odit necessitatibus nemo facilis provident beatae mollitia vitae unde voluptates iusto, repellat harum illum ipsa dolore numquam aspernatur iure!"
     },
 ]
+
+const achievements = {
+    clients: 1,
+    projects: projects.length,
+    experience: 0,
+    certifications: 2
+}
+
+const featuredProjects = projects[0]
 
 export {
     skillsets,
     processes,
-    projects
+    projects,
+    achievements,
+    featuredProjects
 }

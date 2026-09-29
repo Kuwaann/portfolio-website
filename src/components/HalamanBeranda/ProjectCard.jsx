@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { EyeIcon } from 'lucide-react'
 
-export function ProjectCard({ className = "", project }) {
+export function ProjectCard({ className = "", project, onClick, onHoverBg, onLeaveBg }) {
     const cardRef = useRef(null);
     const imgRef = useRef(null);
     const imgContainerRef = useRef(null);
@@ -37,6 +37,8 @@ export function ProjectCard({ className = "", project }) {
             ease: 'back.out(1.7)',
             overwrite: 'auto'
         });
+
+        onHoverBg?.();
     }
 
     const handleMouseLeave = () => {
@@ -53,6 +55,8 @@ export function ProjectCard({ className = "", project }) {
             ease: 'power2.in',
             overwrite: 'auto'
         });
+
+        onLeaveBg();
     }
 
     const handleMouseMove = (e) => {
@@ -92,9 +96,9 @@ export function ProjectCard({ className = "", project }) {
     }, { scope: cardRef })
 
     return (
-        <div className={cn("rounded-sm flex-1 bg-primary-gradient overflow-hidden flex justify-center items-center relative cursor-pointer", className)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove} ref={cardRef} >
+        <div className={cn("rounded-sm flex-1 bg-primary-gradient overflow-hidden flex justify-center items-center relative cursor-pointer", className)} data-bg={project.img[0]} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove} onClick={onClick} ref={cardRef} >
             <div className="flex justify-center items-center w-full h-full bg-primary-gradient flex-1 overflow-hidden" ref={imgContainerRef}>
-                <img src={project.img} alt="Project Card" className="object-cover w-full h-full scale-150" ref={imgRef} />
+                <img src={project.img[0]} alt="Project Card" className="object-cover w-full h-full scale-150" ref={imgRef} />
             </div>
             <div className="absolute top-0 left-0 -translate-x-full -translate-y-full z-20 bg-white px-4 py-2 rounded-sm text-lg flex items-center justify-center whitespace-nowrap pointer-events-none font-semibold text-black shadow-lg gap-2" ref={buttonRef}>
                 <EyeIcon />

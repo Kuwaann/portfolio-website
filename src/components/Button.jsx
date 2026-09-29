@@ -10,8 +10,8 @@ const buttonSizes = {
     small: 'text-lg'
 }
 
-export function Button({ id = "", children, variant = "primary", size = "normal", className }) {
+export function Button({ id = "", children, variant = "primary", size = "normal", className, onClick }) {
     return (
-        <button id={id} className={cn("text-black font-semibold px-8 py-4 rounded-sm w-fit transition-all cursor-pointer", buttonVariants[variant], buttonSizes[size], className)}>{children}</button>
+        <button id={id} className={cn("text-black font-semibold px-8 py-4 rounded-sm w-fit transition-all cursor-pointer", buttonVariants[variant], buttonSizes[size], className)} onClick={onClick}>{children}</button>
     )
 }

@@ -1,6 +1,9 @@
+import { Link } from "react-router"
+
 export function Footer() {
+
     return (
-        <footer className="p-8">
+        <footer className="p-8 relative z-20">
             <div className="bg-primary-gradient rounded-3xl flex flex-col overflow-hidden">
                 <div className="flex border-b border-b-black/25">
                     <span className="font-extrabold text-black text-[256px] leading-48 overflow-hidden">EMIR<br />RIVA<br />LDY.</span>
@@ -22,10 +25,10 @@ export function Footer() {
                             <span className="font-semibold text-8xl text-black">Navigasi Cepat</span>
                         </div>
                         <div className="flex-1 flex flex-col gap-2 px-16 items-start">
-                            <a href="" className="text-black text-2xl">Beranda</a>
-                            <a href="" className="text-black text-2xl">Tentang</a>
-                            <a href="" className="text-black text-2xl">Karya</a>
-                            <a href="" className="text-black text-2xl">Kontak</a>
+                            <Link to="/" className="text-black text-2xl">Beranda</Link>
+                            <Link to="/" className="text-black text-2xl">Tentang</Link>
+                            <Link to="/works" className="text-black text-2xl">Karya</Link>
+                            <Link to="" className="text-black text-2xl">Kontak</Link>
                         </div>
                     </div>
                 </div>
