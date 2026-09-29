@@ -21,7 +21,7 @@ export function LayananSayaSection() {
     return (
         <section className="flex flex-col gap-16 overflow-hidden cursor-default">
             <div className="flex flex-1 gap-44 px-8 justify-between">
-                <h2 className="text-8xl font-semibold w-xl">Lingkup Keahlian Saya.</h2>
+                <h2 className="text-8xl font-medium w-xl">Lingkup Keahlian Saya.</h2>
                 <p className="subtitle text-2xl w-md">Bagi saya, membangun sebuah website bukan hanya tentang membuatnya bekerja, tetapi juga bagaimana desain, interaksi, dan teknologi dapat berpadu menjadi pengalaman yang terasa nyaman dan berkesan.</p>
             </div>
             <div className="pb-32 flex flex-2 flex-col">

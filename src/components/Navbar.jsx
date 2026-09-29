@@ -3,10 +3,12 @@ import { Button } from "./Button"
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+
+    const navigate = useNavigate();
 
     const handleOpenMenu = () => {
         setIsOpen(true);
@@ -58,7 +60,7 @@ export function Navbar() {
                     <MenuIcon />
                     <span className="font-semibold text-2xl">Menu</span>
                 </button>
-                <Button className="rounded-2xl">Kontak</Button>
+                <Button className="rounded-2xl" onClick={() => navigate('/contact')}>Kontak</Button>
             </div>
             <div id="navbar-menu" className="absolute top-0 bg-primary-gradient py-8 z-60 w-full">
                 <div className="relative border-y border-y-black/25 py-32">
