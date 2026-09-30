@@ -6,8 +6,18 @@ import { FaGithub } from "react-icons/fa";
 import { ExternalLinkIcon } from "lucide-react";
 import { Button } from "../../components/Button";
 import ContactPic from "../../assets/contact-picture.jpeg"
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 export function HalamanKontak() {
+    useGSAP(() => {
+        gsap.from('#contact-pic', {
+            width: 0,
+            duration: 1.2,
+            ease: 'circ.inOut'
+        })
+    })
+
     return (
         <>
             <Navbar />
@@ -15,24 +25,24 @@ export function HalamanKontak() {
                 <h1 className="text-9xl font-medium">Kontak Saya</h1>
                 <section>
                     <div className="flex rounded-3xl border border-white/15 overflow-hidden">
-                        <div className="flex-1 flex flex-col gap-32 p-8 hover:bg-white/5 transition-all">
+                        <div className="flex-1 flex flex-col gap-32 p-8 hover:bg-white/5 transition-all cursor-pointer">
                             <FaLinkedinIn className="text-lg" />
                             <div className="flex justify-between items-center">
-                                <h2 className="text-lg">LinkedIn</h2>
+                                <h2 className="text-lg">LinkedIn (<span className="text-white/75">@emirrivaldy</span>)</h2>
                                 <ExternalLinkIcon className="text-lg" />
                             </div>
                         </div>
-                        <div className="flex-1 flex flex-col gap-32 p-8 border-x border-x-white/15 hover:bg-white/5 transition-all">
+                        <div className="flex-1 flex flex-col gap-32 p-8 border-x border-x-white/15 hover:bg-white/5 transition-all cursor-pointer">
                             <FaGithub className="text-lg" />
                             <div className="flex justify-between items-center">
-                                <h2 className="text-lg">GitHub</h2>
+                                <h2 className="text-lg">GitHub (<span className="text-white/75">@kuwaann</span>)</h2>
                                 <ExternalLinkIcon className="text-lg" />
                             </div>
                         </div>
-                        <div className="flex-1 flex flex-col gap-32 p-8 hover:bg-white/5 transition-all">
+                        <div className="flex-1 flex flex-col gap-32 p-8 hover:bg-white/5 transition-all cursor-pointer">
                             <FaInstagram className="text-lg" />
                             <div className="flex justify-between items-center">
-                                <h2 className="text-lg">Instagram</h2>
+                                <h2 className="text-lg">Instagram (<span className="text-white/75">@emirrivaldy</span>)</h2>
                                 <ExternalLinkIcon className="text-lg" />
                             </div>
                         </div>
@@ -40,8 +50,8 @@ export function HalamanKontak() {
                 </section>
                 <section className="flex gap-8">
                     <div className="flex-1 flex gap-8">
-                        <div className="w-50 h-50 overflow-hidden">
-                            <img src={ContactPic} alt="" className="w-full h-full object-cover" />
+                        <div className="w-50 overflow-hidden">
+                            <img id="contact-pic" src={ContactPic} alt="" className="w-full object-cover aspect-square" />
                         </div>
                         <div className="flex flex-col gap-32">
                             <div className="flex flex-col gap-2.5">
