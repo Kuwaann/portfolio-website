@@ -2,8 +2,11 @@ import Hero from '../../../assets/hero.png'
 import { ChevronDownIcon } from 'lucide-react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
+import { useRef } from 'react'
 
 export function HeroSection() {
+    const containerRef = useRef();
+
     useGSAP(() => {
         const timeline = gsap.timeline({
             scrollTrigger: {
@@ -73,7 +76,7 @@ export function HeroSection() {
                 <span id="based" className="font-medium text-2xl">BASED IN INDONESIA</span>
                 <ChevronDownIcon className="chevron" />
             </div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[-9999] overflow-hidden flex items-center justify-center">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[-9999] overflow-hidden flex items-center justify-center" ref={containerRef}>
                 <img src={Hero} alt="Hero Section Profile" id="hero-profile" className="scale-110" />
             </div>
         </section>

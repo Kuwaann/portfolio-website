@@ -60,8 +60,6 @@ export function HalamanKarya() {
             ease: 'power2.out',
             overwrite: 'auto'
         })
-
-
     }
 
     useGSAP(() => {

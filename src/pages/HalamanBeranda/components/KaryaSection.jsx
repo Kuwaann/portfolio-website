@@ -47,7 +47,7 @@ export function KaryaSection() {
                                 <h2 className="text-9xl">{featuredProjects.title}</h2>
                                 <div className="flex gap-2">
                                     {featuredProjects.tags.map((tag) => (
-                                        <Badge>{tag}</Badge>
+                                        <Badge key={featuredProjects.slug}>{tag}</Badge>
                                     ))}
                                 </div>
                             </div>

@@ -7,6 +7,7 @@ import gsap from 'gsap'
 import { useLocation } from 'react-router'
 import { useEffect } from 'react'
 import { HalamanKontak } from './pages/HalamanKontak/HalamanKontak'
+import { HalamanTentang } from './pages/HalamanTentang/HalamanTentang'
 import './App.css'
 
 
@@ -25,6 +26,7 @@ function App() {
       <Route path="/works" element={<HalamanKarya />} />
       <Route path="/works/:slug" element={<HalamanDetilKarya />} />
       <Route path="/contact" element={<HalamanKontak />} />
+      <Route path="/about" element={<HalamanTentang />} />
     </Routes >
   )
 }

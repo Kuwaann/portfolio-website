@@ -3,7 +3,7 @@ import { Link } from "react-router"
 export function Footer() {
 
     return (
-        <footer className="p-8 relative z-20">
+        <footer className="bg-black p-8 relative z-20">
             <div className="bg-primary-gradient rounded-3xl flex flex-col overflow-hidden">
                 <div className="flex border-b border-b-black/25">
                     <span className="font-extrabold text-black text-[256px] leading-48 overflow-hidden">EMIR<br />RIVA<br />LDY.</span>
@@ -26,9 +26,9 @@ export function Footer() {
                         </div>
                         <div className="flex-1 flex flex-col gap-2 px-16 items-start">
                             <Link to="/" className="text-black text-2xl">Beranda</Link>
-                            <Link to="/" className="text-black text-2xl">Tentang</Link>
+                            <Link to="/about" className="text-black text-2xl">Tentang</Link>
                             <Link to="/works" className="text-black text-2xl">Karya</Link>
-                            <Link to="" className="text-black text-2xl">Kontak</Link>
+                            <Link to="/contact" className="text-black text-2xl">Kontak</Link>
                         </div>
                     </div>
                 </div>

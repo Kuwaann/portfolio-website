@@ -16,3 +16,7 @@ body {
   letter-spacing: -7%;
   box-sizing: border-box;
 }
+
+body::-webkit-scrollbar {
+  display: none
+}

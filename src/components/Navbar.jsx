@@ -66,7 +66,7 @@ export function Navbar() {
                 <div className="relative border-y border-y-black/25 py-32">
                     <ul className="flex items-center justify-center gap-8 absolute inset-0">
                         <li className="text-black text-7xl font-semibold"><Link to="/">beranda</Link></li>
-                        <li className="text-black text-7xl font-semibold"><Link to="">tentang</Link></li>
+                        <li className="text-black text-7xl font-semibold"><Link to="/about">tentang</Link></li>
                         <li className="text-black text-7xl font-semibold"><Link to="/works">karya</Link></li>
                     </ul>
                     <div className="h-full flex items-start absolute top-0 bottom-0 right-0">
