@@ -54,12 +54,12 @@ export function HeroSection() {
             <div id="hero-title" className="flex flex-col max-w-full">
                 <div className="flex justify-between px-32">
                     <div className="flex justify-center gap-16">
-                        <span className="font-semibold text-2xl">PENGEMBANG WEB</span>
-                        <span className="font-semibold text-2xl">DESAINER UI/UX</span>
+                        <span className="font-medium text-lg">Pengembang Web</span>
+                        <span className="font-medium text-lg">Desainer UI/UX</span>
                     </div>
                     <div className="flex justify-center gap-16">
-                        <span className="font-semibold text-2xl">DESAINER GRAFIS</span>
-                        <span className="font-semibold text-2xl">VIDEO EDITOR</span>
+                        <span className="font-medium text-lg">Desainer Grafis</span>
+                        <span className="font-medium text-lg">Video Editor</span>
                     </div>
                 </div>
                 <div className="w-full overflow-hidden">
@@ -73,7 +73,7 @@ export function HeroSection() {
             </div>
             <div className="flex justify-between items-center w-full px-32" id="chevron">
                 <ChevronDownIcon className="chevron" />
-                <span id="based" className="font-medium text-2xl">BASED IN INDONESIA</span>
+                <span id="based" className="font-medium text-lg">Geser ke Bawah</span>
                 <ChevronDownIcon className="chevron" />
             </div>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[-9999] overflow-hidden flex items-center justify-center" ref={containerRef}>

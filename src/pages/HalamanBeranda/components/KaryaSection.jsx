@@ -52,8 +52,8 @@ export function KaryaSection() {
                                 </div>
                             </div>
                             <div id="top-work-right" className="w-xl flex flex-col gap-4 items-end">
-                                <p className="text-2xl">{featuredProjects.description}</p>
-                                <Button id="about-button" variant="secondary" onClick={() => navigate(`/works/${featuredProjects.slug}`)}>Pelajari Lebih Lanjut</Button>
+                                <p className="text-lg text-right">{featuredProjects.description}</p>
+                                <Button id="about-button" variant="primary" onClick={() => navigate(`/works/${featuredProjects.slug}`)}>Pelajari Lebih Lanjut</Button>
                             </div>
                         </div>
                     </div>

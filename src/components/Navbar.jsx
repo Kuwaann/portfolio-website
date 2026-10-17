@@ -55,14 +55,14 @@ export function Navbar() {
 
     return (
         <nav className="fixed w-full flex justify-center z-60">
-            <div className="absolute top-8 left-1/2 -translate-x-1/2 flex gap-8 rounded-2xl bg-black/75 pl-8 backdrop-blur-md ">
+            <div className="absolute top-8 left-1/2 -translate-x-1/2 flex gap-4 rounded-2xl bg-black/75 pl-4 backdrop-blur-md ">
                 <button className="flex gap-4 justify-center items-center cursor-pointer" onClick={handleOpenMenu}>
                     <MenuIcon />
-                    <span className="font-semibold text-2xl">Menu</span>
+                    <span className="font-semibold text-lg">Menu</span>
                 </button>
-                <Button className="rounded-2xl" onClick={() => navigate('/contact')}>Kontak</Button>
+                <Button className="rounded-2xl bg-primary-gradient" onClick={() => navigate('/contact')}>Kontak</Button>
             </div>
-            <div id="navbar-menu" className="absolute top-0 bg-primary-gradient py-8 z-60 w-full">
+            <div id="navbar-menu" className="absolute top-0 bg-primary-gradient py-8 z-60 w-full shadow-2xl">
                 <div className="relative border-y border-y-black/25 py-32">
                     <ul className="flex items-center justify-center gap-8 absolute inset-0">
                         <li className="text-black text-7xl font-semibold"><Link to="/">beranda</Link></li>

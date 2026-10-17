@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import Placeholder from '../../assets/imgplaceholder.jpg'
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
@@ -16,7 +15,7 @@ export function ProcessCard({ process, index }) {
             scrollTrigger: {
                 trigger: cardRef.current,
                 scrub: true,
-                start: 'top top',
+                start: 'top 20%',
                 end: 'bottom top'
             },
             paddingBottom: 0,
@@ -30,7 +29,7 @@ export function ProcessCard({ process, index }) {
                 start: 'top bottom',
                 end: 'bottom top'
             },
-            y: 150,
+            yPercent: 15,
             ease: 'none'
         })
     })
@@ -42,10 +41,10 @@ export function ProcessCard({ process, index }) {
                 <span className="text-white/15 text-9xl">{formattedIndex}</span>
             </div>
             <div className="flex flex-col justify-between flex-1 gap-32">
-                <p className="text-2xl">{process.description}</p>
+                <p className="text-lg">{process.description}</p>
                 <div className="w-md overflow-hidden aspect-video">
-                    <div className="w-full h-full scale-125">
-                        <img src={Placeholder} alt="" className="w-full h-full object-cover scale-200" ref={imgRef} />
+                    <div className="w-full h-full rounded-sm grayscale">
+                        <img src={process.img} alt="" className="w-full h-full object-cover scale-125" ref={imgRef} />
                     </div>
                 </div>
 

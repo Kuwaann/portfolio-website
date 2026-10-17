@@ -84,9 +84,12 @@ export function HalamanDetilKarya() {
                     <img src={project.img[0]} alt="" className="w-full h-full object-cover scale-125" ref={imgRef} />
                 </div>
             </section>
-            <section className="px-32 py-32 border-y border-y-white/15 border-dashed mb-4 flex flex-col gap-2">
-                <h3 className="text-7xl text-white/50 font-crimson-text italic">Cerita di Balik Karya</h3>
-                <p className="text-2xl">{project.description}</p>
+            <section className="px-32 border-y border-y-white/15 border-dashed mb-4 flex flex-col gap-2">
+                <div className="border-x border-x-white/15 border-dashed px-32 py-32">
+                    <h3 className="text-[64px] text-white">Cerita di Balik Karya</h3>
+                    <p className="text-lg text-white/50">{project.description}</p>
+                </div>
+
             </section>
             <section className="grid grid-cols-2 px-4 gap-4">
                 <div className="overflow-hidden aspect-square rounded-sm">

@@ -12,11 +12,11 @@ export function Footer() {
                             <span className="font-semibold text-8xl text-black">Ayo Kolaborasi!</span>
                         </div>
                         <div className="flex-1 flex flex-col px-16">
-                            <span className="text-black text-2xl">emirrivaldy@gmail.com</span>
+                            <span className="text-black text-lg">emirrivaldy@gmail.com</span>
                             <div className="flex gap-8">
-                                <a href="https://www.linkedin.com/in/emirrivaldy/" target="_blank" className="text-black text-2xl">LinkedIn</a>
-                                <a href="https://www.instagram.com/emirrivaldy/" target="_blank" className="text-black text-2xl">Instagram</a>
-                                <a href="https://github.com/Kuwaann" target="_blank" className="text-black text-2xl">GitHub</a>
+                                <a href="https://www.linkedin.com/in/emirrivaldy/" target="_blank" className="text-black text-lg font-semibold">LinkedIn</a>
+                                <a href="https://www.instagram.com/emirrivaldy/" target="_blank" className="text-black text-lg font-semibold">Instagram</a>
+                                <a href="https://github.com/Kuwaann" target="_blank" className="text-black text-lg font-semibold">GitHub</a>
                             </div>
                         </div>
                     </div>
@@ -25,10 +25,10 @@ export function Footer() {
                             <span className="font-semibold text-8xl text-black">Navigasi Cepat</span>
                         </div>
                         <div className="flex-1 flex flex-col gap-2 px-16 items-start">
-                            <Link to="/" className="text-black text-2xl">Beranda</Link>
-                            <Link to="/about" className="text-black text-2xl">Tentang</Link>
-                            <Link to="/works" className="text-black text-2xl">Karya</Link>
-                            <Link to="/contact" className="text-black text-2xl">Kontak</Link>
+                            <Link to="/" className="text-black text-lg font-semibold">Beranda</Link>
+                            <Link to="/about" className="text-black text-lg font-semibold">Tentang</Link>
+                            <Link to="/works" className="text-black text-lg font-semibold">Karya</Link>
+                            <Link to="/contact" className="text-black text-lg font-semibold">Kontak</Link>
                         </div>
                     </div>
                 </div>

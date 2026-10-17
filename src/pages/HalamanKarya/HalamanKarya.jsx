@@ -92,7 +92,7 @@ export function HalamanKarya() {
                     <div key={`${project.slug}-${index}`} className="project-card flex flex-col gap-4">
                         <ProjectCard project={project} onClick={() => navigate(`/works/${project.slug}`)} onHoverBg={() => handleHoverProject(project.img[0])} onLeaveBg={handleLeaveProject} />
                         <div className="flex flex-col gap-2">
-                            <h2 className="text-2xl font-medium">{project.title}</h2>
+                            <h2 className="text-lg font-medium">{project.title}</h2>
                             <div className="flex gap-2.5">
                                 {project.tags.map((tag) => (
                                     <Badge key={tag}>{tag}</Badge>
