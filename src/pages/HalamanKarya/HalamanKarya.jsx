@@ -84,10 +84,11 @@ export function HalamanKarya() {
     return (
         <>
             <Navbar />
-            <img id="karya-background-1" src={Placeholder} className="fixed inset-0 -z-10 w-full h-full pointer-events-none object-cover opacity-0" ref={bg1Ref} alt="" />
-            <img id="karya-background-2" src={Placeholder2} className="fixed inset-0 -z-10 w-full h-full pointer-events-none object-cover opacity-0" ref={bg2Ref} alt="" />
 
-            <section id="karya" className="w-full grid grid-cols-[1fr_1.5fr_1fr] items-start gap-x-4 gap-y-16 p-4 py-32">
+
+            <main id="karya" className="w-full grid grid-cols-[1fr_1.5fr_1fr] items-start gap-x-4 gap-y-16 p-4 py-32">
+                <img src={Placeholder} className="fixed inset-0 -z-10 w-full h-full pointer-events-none object-cover opacity-0" ref={bg1Ref} alt="" />
+                <img src={Placeholder2} className="fixed inset-0 -z-10 w-full h-full pointer-events-none object-cover opacity-0" ref={bg2Ref} alt="" />
                 {projects.map((project, index) => (
                     <div key={`${project.slug}-${index}`} className="project-card flex flex-col gap-4">
                         <ProjectCard project={project} onClick={() => navigate(`/works/${project.slug}`)} onHoverBg={() => handleHoverProject(project.img[0])} onLeaveBg={handleLeaveProject} />
@@ -101,7 +102,7 @@ export function HalamanKarya() {
                         </div>
                     </div>
                 ))}
-            </section>
+            </main>
             <Footer />
         </>
     )
