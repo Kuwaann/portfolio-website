@@ -7,6 +7,7 @@ import { SplitText, } from "gsap/all"
 import { HeroSection } from "./components/HeroSection"
 import { BiographySection } from "./components/BiographySection"
 import { StorySection } from "./components/StorySection"
+import { KPISection } from "../../components/KPISection"
 
 
 export function HalamanTentang() {
@@ -53,6 +54,7 @@ export function HalamanTentang() {
                 <HeroSection />
                 <BiographySection />
                 <StorySection />
+                <KPISection className="bg-black relative border-white/15 border" />
             </main>
             <Footer />
         </>

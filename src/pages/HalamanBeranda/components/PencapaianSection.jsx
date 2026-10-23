@@ -1,10 +1,10 @@
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
+import { SplitText } from 'gsap/all'
+import { KPISection } from '../../../components/KPISection'
 import Emir from '../../../assets/hero.png'
 import Emir2 from '../../../assets/emir2.png'
 import Emir3 from '../../../assets/emir3.png'
-import { SplitText } from 'gsap/all'
-import { achievements } from '../../../../constants'
 
 export function PencapaianSection() {
     useGSAP(() => {
@@ -94,24 +94,7 @@ export function PencapaianSection() {
                     <blockquote className="text-5xl max-w-lg font-medium">“Tidak hanya bekerja, tetapi memberikan hasil dan kepuasan nyata”</blockquote>
                     <figcaption className="text-2xl font-medium">Muhammad Emir Rivaldy, 2026</figcaption>
                 </figure>
-                <div className="flex item-center justify-between w-full px-32">
-                    <div className="kpi-card flex flex-col gap-2.5 py-16 justify-center ">
-                        <h3 className="font-light">Klien</h3>
-                        <span className="font-semibold text-7xl">{achievements.clients}</span>
-                    </div>
-                    <div className="kpi-card flex flex-col gap-2.5 py-16 justify-center">
-                        <h3 className="font-light">Proyek</h3>
-                        <span className="font-semibold text-7xl">{achievements.projects}</span>
-                    </div>
-                    <div className="kpi-card flex flex-col gap-2.5 py-16 justify-center">
-                        <h3 className="font-light">Pengalaman Kerja</h3>
-                        <span className="font-semibold text-7xl">{achievements.experience} th</span>
-                    </div>
-                    <div className="kpi-card flex flex-col gap-2.5 py-16 justify-center">
-                        <h3 className="font-light">Sertifikat</h3>
-                        <span className="font-semibold text-7xl">{achievements.certifications}</span>
-                    </div>
-                </div>
+                <KPISection />
             </div>
         </section>
     )

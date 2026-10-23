@@ -3,9 +3,11 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { Badge } from "../Badge";
 import Placeholder from '../../assets/imgplaceholder.jpg'
+import { SplitText } from "gsap/all";
 
 export function SkillsetCard({ index, skillset }) {
     const cardRef = useRef(null);
+    const skillsetNameRef = useRef(null);
     const previewRef = useRef(null)
     const xTo = useRef(null);
     const yTo = useRef(null);
@@ -55,6 +57,8 @@ export function SkillsetCard({ index, skillset }) {
     }
 
     useGSAP(() => {
+        const skillsetNameSplit = SplitText.create(skillsetNameRef.current, { type: "chars" })
+
         gsap.set(previewRef.current, { scale: 0, opacity: 0, xPercent: -50, yPercent: -50 });
         xTo.current = gsap.quickTo(previewRef.current, "x", {
             duration: 0.4,
@@ -73,18 +77,23 @@ export function SkillsetCard({ index, skillset }) {
             },
             defaults: {
                 duration: 0.5,
-                ease: "power1.inOut",
+                ease: "circ.inOut",
             }
         })
-            .from("h3", {
+            .from(skillsetNameSplit.chars, {
                 yPercent: 100,
-                opacity: 0,
+                duration: 0.5,
+                stagger: 0.05,
+                ease: "circ.inOut",
+                opacity: 0
             })
             .from("div div div span", {
                 yPercent: 100,
-                opacity: 0,
+                duration: 0.5,
                 stagger: 0.05,
-            })
+                ease: "circ.inOut",
+                opacity: 0
+            }, "<50%")
     }, { scope: cardRef })
 
     return (
@@ -92,7 +101,7 @@ export function SkillsetCard({ index, skillset }) {
             <div className="skillset flex gap-4 py-8 group px-8">
                 <span className="skillset-number font-medium text-2xl text-white/25">[{formattedIndex}]</span>
                 <div className="flex flex-col gap-2.5 group-hover:translate-x-2 transition ease-in-out flex-1 items-start">
-                    <h3 className="text-7xl">{skillset.name}</h3>
+                    <h3 className="text-7xl" ref={skillsetNameRef}>{skillset.name}</h3>
                     <div className="flex gap-2.5">
                         {skillset.skills.map((skill) => (
                             <Badge key={skill}>{skill}</Badge>
