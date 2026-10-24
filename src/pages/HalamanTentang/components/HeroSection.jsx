@@ -82,7 +82,7 @@ export function HeroSection() {
                     ref={rivaldyRef}
                     className="text-[256px] leading-none inline-block"
                 >
-                    rivaldy
+                    rivaldy<span className="text-white/50">©</span>
                 </span>
             </div>
             <div

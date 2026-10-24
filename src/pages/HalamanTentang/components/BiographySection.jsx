@@ -35,7 +35,7 @@ export function BiographySection() {
     })
 
     return (
-        <section className="bg-black relative flex gap-8 p-8  pt-32 z-10" ref={sectionRef}>
+        <section className="bg-black relative flex gap-8 p-8  pt-32 z-10 drop-shadow-2xl" ref={sectionRef}>
             <div className="flex-1">
                 <div className="w-xl overflow-hidden">
                     <img src={Picture} alt="" className="w-full h-full object-cover scale-125" ref={imgRef} />
