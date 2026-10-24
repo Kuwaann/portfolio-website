@@ -8,4 +8,9 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
+  server: {
+    allowedHosts: [
+      'carl-attractive-net-raised.trycloudflare.com',
+    ],
+  },
 })

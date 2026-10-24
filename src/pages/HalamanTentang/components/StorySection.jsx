@@ -3,6 +3,7 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { SplitText } from "gsap/all"
 import { useRef } from "react"
+import { useNavigate } from "react-router"
 import Emir1 from "../../../assets/HalamanTentang/marquee/emir1.jpg"
 import Emir2 from "../../../assets/HalamanTentang/marquee/emir2.jpg"
 import Emir3 from "../../../assets/HalamanTentang/marquee/emir3.jpg"
@@ -11,6 +12,8 @@ import Emir4 from "../../../assets/HalamanTentang/marquee/emir4.jpg"
 
 
 export function StorySection() {
+    const navigate = useNavigate();
+
     const paragraphRef = useRef();
     const marqueeRef = useRef();
 
@@ -44,8 +47,8 @@ export function StorySection() {
                     <p className="text-lg text-justify text-white/50" ref={paragraphRef}>Kecintaan Saya terhadap teknologi dimulai sejak umur dini. Saya gemar bermain video gim bernama Minecraft. Di usia Saya yang masih kecil, Saya membuat sebuah server untuk bermain dengan teman online saya. Untuk teman online saya terhubung, Saya tonton banyak tutorial di platform YouTube, disitu Saya mengotak-atik router Saya seakan-akan Saya mengerti apa yang saya lakukan. Banyak yang Saya pelajari tentang teknologi jaringan dari situ. Lalu, seni adalah turun-temurun dari Ayah Saya, dari kecil Saya berusaha untuk menggambar sebanyak-mungkin dan sangat menyukainya. Intinya, Saya cinta terhadap dunia teknologi dan seni, dan barangkali bisa dipadukan menjadi sebuah mahakarya.</p>
                 </div>
                 <div className="flex gap-2">
-                    <Button variant="primary">Lihat Semua Karya</Button>
-                    <Button variant="secondary">Kontak Saya</Button>
+                    <Button variant="primary" onClick={() => navigate("/works")}>Lihat Semua Karya</Button>
+                    <Button variant="secondary" onClick={() => navigate("/contact")}>Kontak Saya</Button>
                 </div>
             </div>
             <div className="overflow-hidden w-full relative flex-1">

@@ -2,52 +2,96 @@ import { MenuIcon } from "lucide-react"
 import { Button } from "./Button"
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router";
+import { SplitText } from "gsap/all";
 
 export function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
 
+    const navbarMenuItemRef = useRef([]);
+    const navbarMenuItemSplitRef = useRef([]);
+
     const navigate = useNavigate();
 
-    const handleOpenMenu = () => {
-        setIsOpen(true);
+    const { contextSafe } = useGSAP(() => {
+        navbarMenuItemSplitRef.current = navbarMenuItemRef.current.map((item) => SplitText.create(item, { type: "chars" }));
 
-        gsap.to('#navbar-menu', {
-            yPercent: 0,
-            ease: 'circ.inOut'
-        })
+        const allChars = navbarMenuItemSplitRef.current.flatMap((split) => split.chars);
 
-        gsap.to('#navbar-background', {
-            opacity: 1,
-            pointerEvents: 'auto'
-        })
-    }
-
-    const handleCloseMenu = () => {
-        setIsOpen(false);
-
-        gsap.to('#navbar-menu', {
-            yPercent: -100,
-            ease: 'circ.inOut'
-        })
-
-        gsap.to('#navbar-background', {
-            opacity: 0,
-            pointerEvents: 'none'
-        })
-    }
-
-    useGSAP(() => {
         gsap.set('#navbar-menu', {
-            yPercent: -100
+            clipPath: "inset(0% 0% 100% 0%)",
+            pointerEvents: 'none'
         })
 
         gsap.set('#navbar-background', {
             opacity: 0,
             pointerEvents: 'none'
         })
+
+        gsap.set(allChars, {
+            yPercent: 100,
+            opacity: 0
+        })
     })
+
+    const handleOpenMenu = () => {
+        contextSafe(() => {
+            setIsOpen(true);
+
+            const allChars = navbarMenuItemSplitRef.current.flatMap((split) => split.chars);
+
+            const timeline = gsap.timeline({
+                defaults: { overwrite: 'auto' }
+            });
+
+            timeline.to('#navbar-menu', {
+                clipPath: "inset(0% 0% 0% 0%)",
+                pointerEvents: 'auto',
+                ease: 'circ.inOut'
+            }, 0)
+                .to('#navbar-background', {
+                    opacity: 1,
+                    pointerEvents: 'auto'
+                }, 0)
+                .to(allChars, {
+                    yPercent: 0,
+                    duration: 0.6,
+                    opacity: 1,
+                    stagger: 0.03,
+                    ease: 'power3.out'
+                }, 0);
+        })();
+    }
+
+    const handleCloseMenu = () => {
+        contextSafe(() => {
+            setIsOpen(false);
+
+            const allChars = navbarMenuItemSplitRef.current.flatMap((split) => split.chars);
+
+            const timeline = gsap.timeline({
+                defaults: { overwrite: 'auto' }
+            });
+
+            timeline.to('#navbar-menu', {
+                clipPath: "inset(0% 0% 100% 0%)",
+                pointerEvents: 'none',
+                ease: 'circ.inOut'
+            }, 0).to(allChars, {
+                yPercent: 100,
+                opacity: 0,
+                duration: 0.3,
+                stagger: 0.01,
+                ease: 'power2.in'
+            }, 0)
+                .to('#navbar-background', {
+                    opacity: 0,
+                    pointerEvents: 'none'
+                }, 0);
+        })();
+    }
+
 
     useEffect(() => {
         document.body.style.overflow = isOpen ? 'hidden' : ''
@@ -64,17 +108,17 @@ export function Navbar() {
             </div>
             <div id="navbar-menu" className="absolute top-0 bg-primary-gradient py-8 z-60 w-full shadow-2xl">
                 <div className="relative border-y border-y-black/25 py-32">
-                    <ul className="flex items-center justify-center gap-8 absolute inset-0">
-                        <li className="navbar-menu-item text-black text-7xl font-semibold"><Link to="/">beranda</Link></li>
-                        <li className="navbar-menu-item text-black text-7xl font-semibold"><Link to="/about">tentang</Link></li>
-                        <li className="navbar-menu-item text-black text-7xl font-semibold"><Link to="/works">karya</Link></li>
+                    <ul className="flex items-center justify-center gap-8 overflow-hidden absolute inset-0">
+                        <li className="navbar-menu-item text-black text-7xl font-semibold pb-2" ref={(el) => navbarMenuItemRef.current[0] = el}><Link to="/">beranda</Link></li>
+                        <li className="navbar-menu-item text-black text-7xl font-semibold pb-2" ref={(el) => navbarMenuItemRef.current[1] = el}><Link to="/about">tentang</Link></li>
+                        <li className="navbar-menu-item text-black text-7xl font-semibold pb-2" ref={(el) => navbarMenuItemRef.current[2] = el}><Link to="/works">karya</Link></li>
                     </ul>
                     <div className="h-full flex items-start absolute top-0 bottom-0 right-0">
                         <button className="h-full text-black font-semibold text-8xl cursor-pointer" onClick={handleCloseMenu}>[X]</button>
                     </div>
                 </div>
             </div>
-            <div id="navbar-background" className="h-screen w-full bg-black/50 absolute opacity-0 z-40" onClick={handleCloseMenu}>
+            <div id="navbar-background" className="h-screen w-full bg-black/50 fixed opacity-0 z-40" onClick={handleCloseMenu}>
             </div>
         </nav>
     )
