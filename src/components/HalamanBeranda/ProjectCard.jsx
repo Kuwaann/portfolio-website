@@ -71,15 +71,16 @@ export function ProjectCard({ className = "", project, onClick, onHoverBg, onLea
     };
 
     useGSAP(() => {
-        gsap.to(imgRef.current,
+        gsap.fromTo(imgRef.current,
+            { yPercent: -15 },
             {
                 scrollTrigger: {
-                    trigger: imgRef.current,
+                    trigger: imgContainerRef.current,
                     scrub: true,
                     start: "top bottom",
                     end: "bottom top"
                 },
-                yPercent: 30,
+                yPercent: 15,
                 ease: 'none'
             }
         )

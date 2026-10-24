@@ -10,28 +10,36 @@ export function BiographySection() {
     const paragraphRef = useRef();
 
     useGSAP(() => {
-        const paragraphSplit = SplitText.create(paragraphRef.current, { type: "chars" })
+        const split = SplitText.create(paragraphRef.current, { type: "chars" });
+
+        // Set initial state secara eksplisit sebelum ScrollTrigger jalan
+        // supaya chars tidak langsung muncul sebelum animasi dimulai
+        gsap.set(split.chars, { opacity: 0.1 });
 
         gsap.to(imgRef.current, {
             scrollTrigger: {
                 trigger: imgRef.current,
                 scrub: true,
                 start: "top bottom",
-                end: "bottom top"
+                end: "bottom top",
+                invalidateOnRefresh: true,
             },
             yPercent: 20,
         });
 
-        gsap.from(paragraphSplit.chars, {
+        gsap.to(split.chars, {
             scrollTrigger: {
                 trigger: sectionRef.current,
                 scrub: true,
                 start: 'top 40%',
-                end: 'bottom bottom'
+                end: 'bottom bottom',
+                invalidateOnRefresh: true,
             },
             stagger: 0.02,
-            opacity: 0.1
+            opacity: 1,
         });
+
+        return () => split.revert();
     })
 
     return (
