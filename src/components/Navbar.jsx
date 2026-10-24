@@ -3,7 +3,7 @@ import { Button } from "./Button"
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useEffect, useState, useRef } from "react";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { SplitText } from "gsap/all";
 
 export function Navbar() {
@@ -109,9 +109,9 @@ export function Navbar() {
             <div id="navbar-menu" className="absolute top-0 bg-primary-gradient py-8 z-60 w-full shadow-2xl">
                 <div className="relative border-y border-y-black/25 py-32">
                     <ul className="flex items-center justify-center gap-8 overflow-hidden absolute inset-0">
-                        <li className="navbar-menu-item text-black text-7xl font-semibold pb-2" ref={(el) => navbarMenuItemRef.current[0] = el}><Link to="/">beranda</Link></li>
-                        <li className="navbar-menu-item text-black text-7xl font-semibold pb-2" ref={(el) => navbarMenuItemRef.current[1] = el}><Link to="/about">tentang</Link></li>
-                        <li className="navbar-menu-item text-black text-7xl font-semibold pb-2" ref={(el) => navbarMenuItemRef.current[2] = el}><Link to="/works">karya</Link></li>
+                        <li className="navbar-menu-item text-black text-7xl font-semibold overflow-hidden cursor-pointer p-1" ref={(el) => navbarMenuItemRef.current[0] = el} onClick={() => navigate("/")}>beranda</li>
+                        <li className="navbar-menu-item text-black text-7xl font-semibold overflow-hidden cursor-pointer p-1" ref={(el) => navbarMenuItemRef.current[1] = el} onClick={() => navigate("/about")}>tentang</li>
+                        <li className="navbar-menu-item text-black text-7xl font-semibold overflow-hidden cursor-pointer p-1" ref={(el) => navbarMenuItemRef.current[2] = el} onClick={() => navigate("/works")}>karya</li>
                     </ul>
                     <div className="h-full flex items-start absolute top-0 bottom-0 right-0">
                         <button className="h-full text-black font-semibold text-8xl cursor-pointer" onClick={handleCloseMenu}>[X]</button>
