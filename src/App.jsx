@@ -25,7 +25,8 @@ function App() {
   gsap.ticker.lagSmoothing(0);
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
+    ScrollTrigger.refresh();
   }, [pathname])
 
   return (
