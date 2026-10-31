@@ -2,7 +2,8 @@ import { cn } from '../../lib/utils'
 import gsap from 'gsap'
 import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
-import { EyeIcon } from 'lucide-react'
+import { EyeIcon } from 'lucide-react';
+import { useMediaQuery } from 'react-responsive';
 
 export function ProjectCard({ className = "", project, onClick, onHoverBg, onLeaveBg }) {
     const cardRef = useRef(null);
@@ -13,7 +14,11 @@ export function ProjectCard({ className = "", project, onClick, onHoverBg, onLea
     const xTo = useRef(null);
     const yTo = useRef(null);
 
+    const isMobile = useMediaQuery({ maxWidth: 767 });
+
     const handleMouseEnter = (e) => {
+        if (isMobile) return;
+
         if (cardRef.current) {
             const rect = cardRef.current.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -42,6 +47,8 @@ export function ProjectCard({ className = "", project, onClick, onHoverBg, onLea
     }
 
     const handleMouseLeave = () => {
+        if (!cardRef.current || isMobile) return;
+
         gsap.to(imgContainerRef.current, {
             scale: 1,
             duration: 0.5,
@@ -60,7 +67,7 @@ export function ProjectCard({ className = "", project, onClick, onHoverBg, onLea
     }
 
     const handleMouseMove = (e) => {
-        if (!cardRef.current) return;
+        if (!cardRef.current || isMobile) return;
 
         const rect = cardRef.current.getBoundingClientRect();
         const x = e.clientX - rect.left;

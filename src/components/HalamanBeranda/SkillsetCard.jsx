@@ -2,8 +2,9 @@ import { useGSAP } from "@gsap/react"
 import { useRef } from "react";
 import gsap from "gsap";
 import { Badge } from "../Badge";
-import Placeholder from '../../assets/imgplaceholder.jpg'
 import { SplitText } from "gsap/all";
+import { useMediaQuery } from "react-responsive";
+import Placeholder from '../../assets/imgplaceholder.jpg'
 
 export function SkillsetCard({ index, skillset }) {
     const cardRef = useRef(null);
@@ -12,10 +13,15 @@ export function SkillsetCard({ index, skillset }) {
     const xTo = useRef(null);
     const yTo = useRef(null);
 
+    const isMobile = useMediaQuery({ maxWidth: 767 });
+
     index++;
     const formattedIndex = index.toString().padStart(2, "0")
 
     const handleMouseEnter = (e) => {
+        if (isMobile || !cardRef.current || !previewRef.current) return;
+
+
         if (cardRef.current) {
             const rect = cardRef.current.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -36,7 +42,7 @@ export function SkillsetCard({ index, skillset }) {
     }
 
     const handleMouseMove = (e) => {
-        if (!cardRef.current) return;
+        if (isMobile || !cardRef.current || !previewRef.current) return;
 
         const rect = cardRef.current.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -47,6 +53,8 @@ export function SkillsetCard({ index, skillset }) {
     }
 
     const handleMouseLeave = () => {
+        if (isMobile || !cardRef.current || !previewRef.current) return;
+
         gsap.to(previewRef.current, {
             scale: 0,
             opacity: 0,
@@ -97,21 +105,21 @@ export function SkillsetCard({ index, skillset }) {
     }, { scope: cardRef })
 
     return (
-        <div className="border-y border-y-white/25 hover:bg-white/5 transition-all relative" ref={cardRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove}>
+        <div className="border-y border-y-white/25 hover:bg-white/5 transition-all w-full relative" ref={cardRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove}>
             <div className="skillset flex gap-4 py-8 group px-8">
                 <span className="skillset-number font-medium text-2xl text-white/25">[{formattedIndex}]</span>
                 <div className="flex flex-col gap-2.5 group-hover:translate-x-2 transition ease-in-out flex-1 items-start">
-                    <h3 className="text-7xl" ref={skillsetNameRef}>{skillset.name}</h3>
-                    <div className="flex gap-2.5">
+                    <h3 className="text-2xl md:text-7xl" ref={skillsetNameRef}>{skillset.name}</h3>
+                    <div className="flex flex-wrap gap-2.5">
                         {skillset.skills.map((skill) => (
                             <Badge key={skill}>{skill}</Badge>
                         ))}
                     </div>
                 </div>
             </div>
-            <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 aspect-video rounded-sm w-md pointer-events-none overflow-hidden z-20 opacity-0" ref={previewRef}>
+            {!isMobile && <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 aspect-video rounded-sm w-md pointer-events-none overflow-hidden z-20 opacity-0" ref={previewRef}>
                 <img src={Placeholder} alt="" className="w-full h-full object-cover" />
-            </div>
+            </div>}
         </div>
     )
 }
