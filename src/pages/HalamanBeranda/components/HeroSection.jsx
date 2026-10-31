@@ -67,7 +67,7 @@ export function HeroSection() {
                 </div>
                 <div className="w-full py-5 overflow-hidden">
                     <div className="flex marquee mix-blend-difference">
-                        <h1 className="text-9xl md:text-[256px] whitespace-nowrap pr-16">Muhammad Emir Rivaldy •</h1>
+                        <h1 className="text-8xl md:text-[256px] whitespace-nowrap pr-16">Muhammad Emir Rivaldy •</h1>
                         <h1 aria-hidden className="text-8xl md:text-[256px] whitespace-nowrap pr-16">Muhammad Emir Rivaldy •</h1>
                     </div>
                 </div>
