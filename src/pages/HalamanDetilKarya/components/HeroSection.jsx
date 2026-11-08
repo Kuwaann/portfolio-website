@@ -47,7 +47,7 @@ export function HeroSection({ project }) {
         <section className="w-full h-[120vh] relative py-64  mb-4">
             <div className="relative z-20 w-full h-full flex flex-col justify-end items-center gap-6">
                 <span className="text-2xl" ref={projectClientYearRef}>{project.client} • {project.year}</span>
-                <h2 className="text-9xl text-white text-center" ref={projectTitleRef}>{project.title}</h2>
+                <h2 className="text-[64px] md:text-9xl text-white text-center" ref={projectTitleRef}>{project.title}</h2>
                 <div className="flex gap-2">
                     <Badge>Tag 1</Badge>
                     <Badge>Tag 2</Badge>
