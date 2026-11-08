@@ -3,7 +3,7 @@ import { Footer } from "../../components/Footer"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { useRef } from "react"
-import { SplitText, } from "gsap/all"
+import { SplitText, ScrollTrigger } from "gsap/all"
 import { HeroSection } from "./components/HeroSection"
 import { BiographySection } from "./components/BiographySection"
 import { StorySection } from "./components/StorySection"
@@ -37,9 +37,9 @@ export function HalamanTentang() {
         });
 
         // Re-refresh ScrollTrigger setelah font selesai dimuat
-        // document.fonts.ready.then(() => {
-        //     ScrollTrigger.refresh();
-        // });
+        document.fonts.ready.then(() => {
+            ScrollTrigger.refresh();
+        });
 
         // return () => {
         //     paragraph1Split.revert();

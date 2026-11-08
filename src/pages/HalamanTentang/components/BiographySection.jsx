@@ -39,7 +39,7 @@ export function BiographySection() {
             opacity: 1,
         });
 
-        return () => split.revert();
+
     })
 
     return (
