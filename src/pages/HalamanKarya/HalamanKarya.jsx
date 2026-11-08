@@ -86,7 +86,7 @@ export function HalamanKarya() {
             <Navbar />
 
 
-            <main id="karya" className="w-full grid grid-cols-[1fr_1.5fr_1fr] items-start gap-x-4 gap-y-16 p-4 py-32">
+            <main id="karya" className="w-full grid grid-cols-1 md:grid-cols-[1fr_1.5fr_1fr] items-start gap-x-4 gap-y-16 p-4 py-32">
                 <img src={Placeholder} className="fixed inset-0 -z-10 w-full h-full pointer-events-none object-cover opacity-0" ref={bg1Ref} alt="" />
                 <img src={Placeholder2} className="fixed inset-0 -z-10 w-full h-full pointer-events-none object-cover opacity-0" ref={bg2Ref} alt="" />
                 {projects.map((project, index) => (
