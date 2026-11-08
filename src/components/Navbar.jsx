@@ -99,7 +99,7 @@ export function Navbar() {
 
     return (
         <nav className="fixed w-full flex justify-center z-60">
-            <div className="absolute top-8 left-1/2 -translate-x-1/2 flex gap-4 rounded-2xl bg-black/75 md:spl-4 backdrop-blur-md px-4 py-2 md:px-0 md:py-0">
+            <div className="absolute top-8 left-1/2 -translate-x-1/2 flex gap-4 rounded-2xl bg-black/75 md:pl-4 backdrop-blur-md px-4 py-2 md:px-0 md:py-0">
                 <button className="flex gap-4 justify-center items-center cursor-pointer" onClick={handleOpenMenu}>
                     <MenuIcon />
                     <span className="font-semibold text-lg">Menu</span>
