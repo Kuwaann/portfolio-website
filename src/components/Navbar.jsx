@@ -99,21 +99,22 @@ export function Navbar() {
 
     return (
         <nav className="fixed w-full flex justify-center z-60">
-            <div className="absolute top-8 left-1/2 -translate-x-1/2 flex gap-4 rounded-2xl bg-black/75 pl-4 backdrop-blur-md ">
+            <div className="absolute top-8 left-1/2 -translate-x-1/2 flex gap-4 rounded-2xl bg-black/75 pl-4 backdrop-blur-md px-4 py-2 md:px-0 md:py-0">
                 <button className="flex gap-4 justify-center items-center cursor-pointer" onClick={handleOpenMenu}>
                     <MenuIcon />
                     <span className="font-semibold text-lg">Menu</span>
                 </button>
-                <Button className="rounded-2xl bg-primary-gradient" onClick={() => navigate('/contact')}>Kontak</Button>
+                <Button className="rounded-2xl bg-primary-gradient hidden md:block" onClick={() => navigate('/contact')}>Kontak</Button>
             </div>
-            <div id="navbar-menu" className="absolute top-0 bg-primary-gradient py-8 z-60 w-full shadow-2xl">
-                <div className="relative border-y border-y-black/25 py-32">
-                    <ul className="flex items-center justify-center gap-8 overflow-hidden absolute inset-0">
+            <div id="navbar-menu" className="absolute top-0 bg-primary-gradient py-8 z-60 w-full h-screen md:h-auto shadow-2xl">
+                <div className="relative flex flex-col-reverse justify-center items-center md:flex-row border-y border-y-black/25 py-32 gap-8 md:gap-0">
+                    <ul className="flex flex-col md:flex-row items-center justify-center gap-8 overflow-hidden md:absolute inset-0">
                         <li className="navbar-menu-item text-black text-7xl font-semibold overflow-hidden cursor-pointer p-1" ref={(el) => navbarMenuItemRef.current[0] = el} onClick={() => navigate("/")}>beranda</li>
                         <li className="navbar-menu-item text-black text-7xl font-semibold overflow-hidden cursor-pointer p-1" ref={(el) => navbarMenuItemRef.current[1] = el} onClick={() => navigate("/about")}>tentang</li>
                         <li className="navbar-menu-item text-black text-7xl font-semibold overflow-hidden cursor-pointer p-1" ref={(el) => navbarMenuItemRef.current[2] = el} onClick={() => navigate("/works")}>karya</li>
+                        <li className="navbar-menu-item text-black text-7xl font-semibold overflow-hidden cursor-pointer p-1 md:hidden" ref={(el) => navbarMenuItemRef.current[3] = el} onClick={() => navigate("/contact")}>kontak</li>
                     </ul>
-                    <div className="h-full flex items-start absolute top-0 bottom-0 right-0">
+                    <div className="h-full flex items-start static md:absolute top-0 bottom-0 right-0">
                         <button className="h-full text-black font-semibold text-8xl cursor-pointer" onClick={handleCloseMenu}>[X]</button>
                     </div>
                 </div>
