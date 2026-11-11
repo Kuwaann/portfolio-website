@@ -1,10 +1,13 @@
 import { useRef } from "react"
 import { SplitText } from "gsap/all";
 import gsap from "gsap";
-import Picture from "../../../assets/HalamanKontak/contact-picture.jpeg"
 import { useGSAP } from "@gsap/react";
+import { useMediaQuery } from "react-responsive"
+import Picture from "../../../assets/HalamanKontak/contact-picture.jpeg"
 
 export function BiographySection() {
+    const isMobile = useMediaQuery({ maxWidth: 767 })
+
     const sectionRef = useRef();
     const imgRef = useRef();
     const paragraphRef = useRef();
@@ -31,8 +34,8 @@ export function BiographySection() {
             scrollTrigger: {
                 trigger: sectionRef.current,
                 scrub: true,
-                start: 'top 40%',
-                end: 'bottom bottom',
+                start: isMobile ? 'top 10%' : 'top 40%',
+                end: isMobile ? '+=300' : 'bottom bottom',
                 invalidateOnRefresh: true,
             },
             stagger: 0.02,
@@ -43,14 +46,14 @@ export function BiographySection() {
     })
 
     return (
-        <section className="bg-black relative flex gap-8 p-8  pt-32 z-10 drop-shadow-2xl" ref={sectionRef}>
+        <section className="bg-black relative flex flex-col md:flex-row gap-8 p-4 md:p-8 pt-32 z-10 drop-shadow-2xl" ref={sectionRef}>
             <div className="flex-1">
-                <div className="w-xl overflow-hidden">
+                <div className="w-full md:w-xl overflow-hidden">
                     <img src={Picture} alt="" className="w-full h-full object-cover scale-125" ref={imgRef} />
                 </div>
             </div>
             <div className="flex-1">
-                <p className="text-lg sticky top-1/2" ref={paragraphRef}>Halo, Saya Muhammad Emir Rivaldy, mahasiswa aktif Sistem Informasi di Universitas Pembangunan Nasional "Veteran" Yogyakarta dan berbasis di Jakarta, Indonesia yang menekuni bidang Web Developing, UI/UX & Graphics Design, dan Video Editing.</p>
+                <p className="text-xs md:text-lg sticky top-1/2 hyphens-auto" ref={paragraphRef}>Halo, Saya Muhammad Emir Rivaldy, mahasiswa aktif Sistem Informasi di Universitas Pembangunan Nasional "Veteran" Yogyakarta dan berbasis di Jakarta, Indonesia yang menekuni bidang Web Developing, UI/UX & Graphics Design, dan Video Editing.</p>
             </div>
         </section>
     )
