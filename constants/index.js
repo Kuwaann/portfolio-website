@@ -109,7 +109,7 @@ const achievements = {
     certifications: 2
 }
 
-const featuredProjects = projects[0]
+const featuredProjects = [projects[0], projects[1], projects[3]]
 
 export {
     skillsets,
