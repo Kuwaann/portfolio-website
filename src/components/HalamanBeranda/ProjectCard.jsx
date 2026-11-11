@@ -3,7 +3,6 @@ import gsap from 'gsap'
 import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { EyeIcon } from 'lucide-react';
-import { useMediaQuery } from 'react-responsive';
 
 export function ProjectCard({ className = "", project, onClick, onHoverBg, onLeaveBg }) {
     const cardRef = useRef(null);
@@ -13,11 +12,10 @@ export function ProjectCard({ className = "", project, onClick, onHoverBg, onLea
 
     const xTo = useRef(null);
     const yTo = useRef(null);
-
-    const isMobile = useMediaQuery({ maxWidth: 767 });
+    const isMobileRef = useRef(false);
 
     const handleMouseEnter = (e) => {
-        if (isMobile) return;
+        if (isMobileRef.current) return;
 
         if (cardRef.current) {
             const rect = cardRef.current.getBoundingClientRect();
@@ -44,10 +42,10 @@ export function ProjectCard({ className = "", project, onClick, onHoverBg, onLea
         });
 
         onHoverBg?.();
-    }
+    };
 
     const handleMouseLeave = () => {
-        if (!cardRef.current || isMobile) return;
+        if (!cardRef.current || isMobileRef.current) return;
 
         gsap.to(imgContainerRef.current, {
             scale: 1,
@@ -63,11 +61,11 @@ export function ProjectCard({ className = "", project, onClick, onHoverBg, onLea
             overwrite: 'auto'
         });
 
-        onLeaveBg();
-    }
+        onLeaveBg?.();
+    };
 
     const handleMouseMove = (e) => {
-        if (!cardRef.current || isMobile) return;
+        if (!cardRef.current || isMobileRef.current) return;
 
         const rect = cardRef.current.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -78,40 +76,52 @@ export function ProjectCard({ className = "", project, onClick, onHoverBg, onLea
     };
 
     useGSAP(() => {
-        gsap.fromTo(imgRef.current,
-            { yPercent: -15 },
-            {
-                scrollTrigger: {
-                    trigger: imgContainerRef.current,
-                    scrub: true,
-                    start: "top bottom",
-                    end: "bottom top"
-                },
-                yPercent: 15,
-                ease: 'none'
-            }
-        )
+        const mm = gsap.matchMedia();
 
-        gsap.set(buttonRef.current, { xPercent: -100, yPercent: -100, scale: 0, opacity: 0 });
-        xTo.current = gsap.quickTo(buttonRef.current, "x", {
-            duration: 0.4,
-            ease: 'power3.out'
-        })
-        yTo.current = gsap.quickTo(buttonRef.current, "y", {
-            duration: 0.4,
-            ease: 'power3.out'
-        })
-    }, { scope: cardRef })
+        mm.add({
+            isDesktop: "(min-width: 768px)",
+            isMobile: "(max-width: 767px)"
+        }, (context) => {
+            const { isMobile } = context.conditions;
+            isMobileRef.current = isMobile;
+
+            gsap.fromTo(imgRef.current,
+                { yPercent: isMobile ? -5 : -15 },
+                {
+                    scrollTrigger: {
+                        trigger: imgContainerRef.current,
+                        scrub: true,
+                        start: "top bottom",
+                        end: "bottom top"
+                    },
+                    yPercent: isMobile ? 5 : 15,
+                    ease: 'none'
+                }
+            );
+
+            if (!isMobile) {
+                gsap.set(buttonRef.current, { xPercent: -100, yPercent: -100, scale: 0, opacity: 0 });
+                xTo.current = gsap.quickTo(buttonRef.current, "x", {
+                    duration: 0.4,
+                    ease: 'power3.out'
+                });
+                yTo.current = gsap.quickTo(buttonRef.current, "y", {
+                    duration: 0.4,
+                    ease: 'power3.out'
+                });
+            }
+        });
+    }, { scope: cardRef });
 
     return (
-        <div className={cn("rounded-sm flex-1 bg-primary-gradient overflow-hidden flex justify-center items-center relative cursor-pointer", className)} data-bg={project.img[0]} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove} onClick={onClick} ref={cardRef} >
+        <div className={cn("rounded-sm flex-1 bg-primary-gradient overflow-hidden flex justify-center items-center relative cursor-pointer", className)} data-bg={project?.img?.[0]} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove} onClick={onClick} ref={cardRef} >
             <div className="flex justify-center items-center w-full h-full bg-primary-gradient flex-1 overflow-hidden" ref={imgContainerRef}>
-                <img src={project.img[0]} alt="Project Card" className="object-cover w-full h-full scale-150" ref={imgRef} />
+                <img src={project?.img?.[0]} alt="Project Card" className="object-cover w-full h-full scale-150" ref={imgRef} />
             </div>
             <div className="absolute top-0 left-0 -translate-x-full -translate-y-full z-20 bg-white px-4 py-2 rounded-sm text-lg flex items-center justify-center whitespace-nowrap pointer-events-none font-semibold text-black shadow-lg gap-2" ref={buttonRef}>
                 <EyeIcon />
                 Pelajari Karya
             </div>
         </div>
-    )
+    );
 }

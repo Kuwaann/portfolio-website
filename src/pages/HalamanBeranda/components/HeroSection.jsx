@@ -3,56 +3,62 @@ import { ChevronDownIcon } from 'lucide-react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { useRef } from 'react'
-import { useMediaQuery } from 'react-responsive'
 
 export function HeroSection() {
+    const sectionRef = useRef();
     const containerRef = useRef();
 
-    const isMobile = useMediaQuery({ maxWidth: 767 });
-
     useGSAP(() => {
-        const timeline = gsap.timeline({
-            scrollTrigger: {
-                trigger: "#hero",
-                start: "top top",
-                end: "+=300",
-                scrub: true,
-                pin: true,
-            }
+        const mm = gsap.matchMedia();
+
+        mm.add({
+            isDesktop: "(min-width: 768px)",
+            isMobile: "(max-width: 767px)"
+        }, (context) => {
+            const { isMobile } = context.conditions;
+
+            const timeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top top",
+                    end: "+=300",
+                    scrub: true,
+                    pin: true,
+                    invalidateOnRefresh: true
+                }
+            })
+
+            timeline.to(".chevron", {
+                y: isMobile ? -15 : -50,
+                opacity: 0,
+                ease: "none"
+            })
+
+            gsap.to("#hero-profile", {
+                y: 30,
+                opacity: 0,
+                scrollTrigger: {
+                    trigger: "#hero",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true,
+                }
+            })
+
+            gsap.to("#based", {
+                y: -90,
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true,
+                }
+            })
         })
-
-        timeline.to(".chevron", {
-            y: isMobile ? -15 : -50,
-            opacity: 0,
-            ease: "none"
-        })
-
-        gsap.to("#hero-profile", {
-            y: 30,
-            opacity: 0,
-            scrollTrigger: {
-                trigger: "#hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: true,
-            }
-        })
-
-        gsap.to("#based", {
-            y: -90,
-            scrollTrigger: {
-                trigger: "#hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: true,
-            }
-        })
-
-
-    })
+    }, { scope: sectionRef })
 
     return (
-        <section id="hero" className="flex flex-col items-center justify-between h-screen py-16 cursor-default">
+        <section className="flex flex-col items-center justify-between h-screen py-16 cursor-default" ref={sectionRef}>
             <span></span>
             <div id="hero-title" className="flex flex-col max-w-full">
                 <div className="flex justify-between px-8 md:px-32 -translate-y-32 md:translate-y-0">
@@ -74,7 +80,7 @@ export function HeroSection() {
 
 
             </div>
-            <div className="flex justify-between items-center w-full px-32" id="chevron">
+            <div className="flex justify-between items-center w-full px-8 md:px-32" id="chevron">
                 <ChevronDownIcon className="chevron" />
                 <span id="based" className="font-medium text-center text-xs md:text-lg">Geser ke Bawah</span>
                 <ChevronDownIcon className="chevron" />

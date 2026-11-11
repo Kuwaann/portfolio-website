@@ -14,6 +14,7 @@ import Placeholder2 from '../../assets/imgplaceholder2.jpg'
 export function HalamanKarya() {
     const navigate = useNavigate();
 
+    const mainRef = useRef(null);
     const bg1Ref = useRef(null);
     const bg2Ref = useRef(null);
     const activeLayerRef = useRef(1);
@@ -27,7 +28,6 @@ export function HalamanKarya() {
         if (nextBg && currentBg) {
             nextBg.src = imgUrl;
             gsap.set(nextBg, { scale: 1 });
-
 
             gsap.to(nextBg, {
                 opacity: 0.2,
@@ -63,30 +63,38 @@ export function HalamanKarya() {
     }
 
     useGSAP(() => {
-        gsap.set('.project-card', { opacity: 0, y: 30 })
+        const mm = gsap.matchMedia();
 
-        ScrollTrigger.batch('.project-card', {
-            start: 'top 95%',
-            once: true,
-            onEnter: (batch) => {
-                gsap.to(batch, {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.6,
-                    stagger: 0.15,
-                    ease: 'power2.out',
-                    overwrite: 'auto'
-                })
-            }
-        })
-    })
+        mm.add({
+            isDesktop: "(min-width: 768px)",
+            isMobile: "(max-width: 767px)"
+        }, (context) => {
+            const { isMobile } = context.conditions;
+
+            gsap.set('.project-card', { opacity: 0, y: isMobile ? 20 : 30 });
+
+            ScrollTrigger.batch('.project-card', {
+                start: isMobile ? 'top 90%' : 'top 95%',
+                once: true,
+                onEnter: (batch) => {
+                    gsap.to(batch, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.6,
+                        stagger: isMobile ? 0.1 : 0.15,
+                        ease: 'power2.out',
+                        overwrite: 'auto'
+                    });
+                }
+            });
+        });
+    }, { scope: mainRef })
 
     return (
         <>
             <Navbar />
 
-
-            <main id="karya" className="w-full grid grid-cols-1 md:grid-cols-[1fr_1.5fr_1fr] items-start gap-x-4 gap-y-16 p-4 py-32">
+            <main id="karya" ref={mainRef} className="w-full grid grid-cols-1 md:grid-cols-[1fr_1.5fr_1fr] items-start gap-x-4 gap-y-16 p-4 py-32">
                 <img src={Placeholder} className="fixed inset-0 -z-10 w-full h-full pointer-events-none object-cover opacity-0" ref={bg1Ref} alt="" />
                 <img src={Placeholder2} className="fixed inset-0 -z-10 w-full h-full pointer-events-none object-cover opacity-0" ref={bg2Ref} alt="" />
                 {projects.map((project, index) => (

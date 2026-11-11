@@ -7,22 +7,30 @@ import { useRef } from "react";
 export function CTASection() {
     const navigate = useNavigate();
 
+    const sectionRef = useRef();
     const textsRef = useRef();
 
     useGSAP(() => {
-        gsap.from(textsRef.current, {
-            scrollTrigger: {
-                trigger: textsRef.current,
-                start: 'top 80%'
-            },
-            gap: '16px',
-            duration: 1.2,
-            ease: 'circ.inOut'
-        });
-    })
+        const mm = gsap.matchMedia();
+
+        mm.add({
+            isDesktop: "(min-width: 768px)",
+            isMobile: "(max-width: 767px)"
+        }, () => {
+            gsap.from(textsRef.current, {
+                scrollTrigger: {
+                    trigger: textsRef.current,
+                    start: 'top 80%'
+                },
+                gap: '16px',
+                duration: 1.2,
+                ease: 'circ.inOut'
+            });
+        })
+    }, { scope: sectionRef })
 
     return (
-        <section className="px-8 py-16 md:px-64 md:py-32 flex flex-col items-center justify-center gap-8 cursor-default">
+        <section className="px-8 py-16 md:px-64 md:py-32 flex flex-col items-center justify-center gap-8 cursor-default" ref={sectionRef}>
             <div className="flex items-center justify-center gap-2" ref={textsRef}>
                 <span className="font-semibold text-[64px] md:text-9xl">(</span>
                 <div className="flex flex-col items-center justify-center gap-4">

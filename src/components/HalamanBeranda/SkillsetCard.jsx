@@ -3,7 +3,6 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { Badge } from "../Badge";
 import { SplitText } from "gsap/all";
-import { useMediaQuery } from "react-responsive";
 import Placeholder from '../../assets/imgplaceholder.jpg'
 
 export function SkillsetCard({ index, skillset }) {
@@ -12,25 +11,21 @@ export function SkillsetCard({ index, skillset }) {
     const previewRef = useRef(null)
     const xTo = useRef(null);
     const yTo = useRef(null);
-
-    const isMobile = useMediaQuery({ maxWidth: 767 });
+    const isMobileRef = useRef(false);
 
     index++;
     const formattedIndex = index.toString().padStart(2, "0")
 
     const handleMouseEnter = (e) => {
-        if (isMobile || !cardRef.current || !previewRef.current) return;
+        if (isMobileRef.current || !cardRef.current || !previewRef.current) return;
 
+        const rect = cardRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
 
-        if (cardRef.current) {
-            const rect = cardRef.current.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            gsap.set(previewRef.current, { x, y });
-            xTo.current?.(x, x);
-            yTo.current?.(y, y);
-        }
+        gsap.set(previewRef.current, { x, y });
+        xTo.current?.(x, x);
+        yTo.current?.(y, y);
 
         gsap.to(previewRef.current, {
             scale: 1,
@@ -42,7 +37,7 @@ export function SkillsetCard({ index, skillset }) {
     }
 
     const handleMouseMove = (e) => {
-        if (isMobile || !cardRef.current || !previewRef.current) return;
+        if (isMobileRef.current || !cardRef.current || !previewRef.current) return;
 
         const rect = cardRef.current.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -53,7 +48,7 @@ export function SkillsetCard({ index, skillset }) {
     }
 
     const handleMouseLeave = () => {
-        if (isMobile || !cardRef.current || !previewRef.current) return;
+        if (isMobileRef.current || !cardRef.current || !previewRef.current) return;
 
         gsap.to(previewRef.current, {
             scale: 0,
@@ -65,43 +60,59 @@ export function SkillsetCard({ index, skillset }) {
     }
 
     useGSAP(() => {
-        const skillsetNameSplit = SplitText.create(skillsetNameRef.current, { type: "chars" })
+        const mm = gsap.matchMedia();
 
-        gsap.set(previewRef.current, { scale: 0, opacity: 0, xPercent: -50, yPercent: -50 });
-        xTo.current = gsap.quickTo(previewRef.current, "x", {
-            duration: 0.4,
-            ease: 'power3.out'
-        });
+        mm.add({
+            isDesktop: "(min-width: 768px)",
+            isMobile: "(max-width: 767px)"
+        }, (context) => {
+            const { isMobile } = context.conditions;
+            isMobileRef.current = isMobile;
 
-        yTo.current = gsap.quickTo(previewRef.current, "y", {
-            duration: 0.4,
-            ease: 'power3.out'
-        });
+            const skillsetNameSplit = SplitText.create(skillsetNameRef.current, { type: "chars" });
 
-        gsap.timeline({
-            scrollTrigger: {
-                trigger: cardRef.current,
-                start: "top 85%",
-            },
-            defaults: {
-                duration: 0.5,
-                ease: "circ.inOut",
+            if (!isMobile && previewRef.current) {
+                gsap.set(previewRef.current, { scale: 0, opacity: 0, xPercent: -50, yPercent: -50 });
+                xTo.current = gsap.quickTo(previewRef.current, "x", {
+                    duration: 0.4,
+                    ease: 'power3.out'
+                });
+
+                yTo.current = gsap.quickTo(previewRef.current, "y", {
+                    duration: 0.4,
+                    ease: 'power3.out'
+                });
             }
-        })
-            .from(skillsetNameSplit.chars, {
-                yPercent: 100,
-                duration: 0.5,
-                stagger: 0.05,
-                ease: "circ.inOut",
-                opacity: 0
+
+            gsap.timeline({
+                scrollTrigger: {
+                    trigger: cardRef.current,
+                    start: "top 85%",
+                },
+                defaults: {
+                    duration: 0.5,
+                    ease: "circ.inOut",
+                }
             })
-            .from("div div div span", {
-                yPercent: 100,
-                duration: 0.5,
-                stagger: 0.05,
-                ease: "circ.inOut",
-                opacity: 0
-            }, "<50%")
+                .from(skillsetNameSplit.chars, {
+                    yPercent: 100,
+                    duration: 0.5,
+                    stagger: 0.05,
+                    ease: "circ.inOut",
+                    opacity: 0
+                })
+                .from("div div div span", {
+                    yPercent: 100,
+                    duration: 0.5,
+                    stagger: 0.05,
+                    ease: "circ.inOut",
+                    opacity: 0
+                }, "<50%");
+
+            return () => {
+                skillsetNameSplit.revert();
+            };
+        });
     }, { scope: cardRef })
 
     return (
@@ -117,9 +128,9 @@ export function SkillsetCard({ index, skillset }) {
                     </div>
                 </div>
             </div>
-            {!isMobile && <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 aspect-video rounded-sm w-md pointer-events-none overflow-hidden z-20 opacity-0" ref={previewRef}>
+            <div className="hidden md:block absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 aspect-video rounded-sm w-md pointer-events-none overflow-hidden z-20 opacity-0" ref={previewRef}>
                 <img src={Placeholder} alt="" className="w-full h-full object-cover" />
-            </div>}
+            </div>
         </div>
     )
 }

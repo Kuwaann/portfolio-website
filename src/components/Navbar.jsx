@@ -1,5 +1,5 @@
-import { MenuIcon } from "lucide-react"
-import { Button } from "./Button"
+import { MenuIcon } from "lucide-react";
+import { Button } from "./Button";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useEffect, useState, useRef } from "react";
@@ -9,31 +9,46 @@ import { SplitText } from "gsap/all";
 export function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
 
+    const navbarRef = useRef(null);
     const navbarMenuItemRef = useRef([]);
     const navbarMenuItemSplitRef = useRef([]);
 
     const navigate = useNavigate();
 
     const { contextSafe } = useGSAP(() => {
-        navbarMenuItemSplitRef.current = navbarMenuItemRef.current.map((item) => SplitText.create(item, { type: "chars" }));
+        const mm = gsap.matchMedia();
 
-        const allChars = navbarMenuItemSplitRef.current.flatMap((split) => split.chars);
+        mm.add({
+            isDesktop: "(min-width: 768px)",
+            isMobile: "(max-width: 767px)"
+        }, () => {
+            navbarMenuItemSplitRef.current.forEach((split) => split?.revert());
+            navbarMenuItemSplitRef.current = navbarMenuItemRef.current
+                .filter(Boolean)
+                .map((item) => SplitText.create(item, { type: "chars" }));
 
-        gsap.set('#navbar-menu', {
-            clipPath: "inset(0% 0% 100% 0%)",
-            pointerEvents: 'none'
-        })
+            const allChars = navbarMenuItemSplitRef.current.flatMap((split) => split.chars);
 
-        gsap.set('#navbar-background', {
-            opacity: 0,
-            pointerEvents: 'none'
-        })
+            gsap.set('#navbar-menu', {
+                clipPath: "inset(0% 0% 100% 0%)",
+                pointerEvents: 'none'
+            });
 
-        gsap.set(allChars, {
-            yPercent: 100,
-            opacity: 0
-        })
-    })
+            gsap.set('#navbar-background', {
+                opacity: 0,
+                pointerEvents: 'none'
+            });
+
+            gsap.set(allChars, {
+                yPercent: 100,
+                opacity: 0
+            });
+
+            return () => {
+                navbarMenuItemSplitRef.current.forEach((split) => split?.revert());
+            };
+        });
+    }, { scope: navbarRef });
 
     const handleOpenMenu = () => {
         contextSafe(() => {
@@ -62,7 +77,7 @@ export function Navbar() {
                     ease: 'power3.out'
                 }, 0);
         })();
-    }
+    };
 
     const handleCloseMenu = () => {
         contextSafe(() => {
@@ -90,15 +105,14 @@ export function Navbar() {
                     pointerEvents: 'none'
                 }, 0);
         })();
-    }
-
+    };
 
     useEffect(() => {
-        document.body.style.overflow = isOpen ? 'hidden' : ''
-    }, [isOpen])
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+    }, [isOpen]);
 
     return (
-        <nav className="fixed w-full flex justify-center z-60">
+        <nav ref={navbarRef} className="fixed w-full flex justify-center z-60">
             <div className="absolute top-8 left-1/2 -translate-x-1/2 flex gap-4 rounded-2xl bg-black/75 md:pl-4 backdrop-blur-md px-4 py-2 md:px-0 md:py-0">
                 <button className="flex gap-4 justify-center items-center cursor-pointer" onClick={handleOpenMenu}>
                     <MenuIcon />
@@ -109,10 +123,10 @@ export function Navbar() {
             <div id="navbar-menu" className="absolute top-0 bg-primary-gradient py-8 z-60 w-full h-screen md:h-auto shadow-2xl">
                 <div className="relative flex flex-col-reverse justify-center items-center md:flex-row border-y border-y-black/25 py-32 gap-8 md:gap-0">
                     <ul className="flex flex-col md:flex-row items-center justify-center gap-8 overflow-hidden md:absolute inset-0">
-                        <li className="navbar-menu-item text-black text-7xl font-semibold overflow-hidden cursor-pointer p-1" ref={(el) => navbarMenuItemRef.current[0] = el} onClick={() => navigate("/")}>beranda</li>
-                        <li className="navbar-menu-item text-black text-7xl font-semibold overflow-hidden cursor-pointer p-1" ref={(el) => navbarMenuItemRef.current[1] = el} onClick={() => navigate("/about")}>tentang</li>
-                        <li className="navbar-menu-item text-black text-7xl font-semibold overflow-hidden cursor-pointer p-1" ref={(el) => navbarMenuItemRef.current[2] = el} onClick={() => navigate("/works")}>karya</li>
-                        <li className="navbar-menu-item text-black text-7xl font-semibold overflow-hidden cursor-pointer p-1 md:hidden" ref={(el) => navbarMenuItemRef.current[3] = el} onClick={() => navigate("/contact")}>kontak</li>
+                        <li className="navbar-menu-item text-black text-7xl font-semibold overflow-hidden cursor-pointer p-1" ref={(el) => navbarMenuItemRef.current[0] = el} onClick={() => { handleCloseMenu(); navigate("/"); }}>beranda</li>
+                        <li className="navbar-menu-item text-black text-7xl font-semibold overflow-hidden cursor-pointer p-1" ref={(el) => navbarMenuItemRef.current[1] = el} onClick={() => { handleCloseMenu(); navigate("/about"); }}>tentang</li>
+                        <li className="navbar-menu-item text-black text-7xl font-semibold overflow-hidden cursor-pointer p-1" ref={(el) => navbarMenuItemRef.current[2] = el} onClick={() => { handleCloseMenu(); navigate("/works"); }}>karya</li>
+                        <li className="navbar-menu-item text-black text-7xl font-semibold overflow-hidden cursor-pointer p-1 md:hidden" ref={(el) => navbarMenuItemRef.current[3] = el} onClick={() => { handleCloseMenu(); navigate("/contact"); }}>kontak</li>
                     </ul>
                     <div className="h-full flex items-start static md:absolute top-0 bottom-0 right-0">
                         <button className="h-full text-black font-semibold text-8xl cursor-pointer" onClick={handleCloseMenu}>[X]</button>
@@ -122,5 +136,5 @@ export function Navbar() {
             <div id="navbar-background" className="h-screen w-full bg-black/50 fixed opacity-0 z-40" onClick={handleCloseMenu}>
             </div>
         </nav>
-    )
+    );
 }

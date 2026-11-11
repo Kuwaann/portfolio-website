@@ -2,30 +2,36 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
 import { ContactForm } from "../../../components/HalamanKontak/ContactForm";
-import ContactPic from "../../../assets/HalamanKontak/contact-picture.jpeg"
+import ContactPic from "../../../assets/HalamanKontak/contact-picture.jpeg";
 import { ChevronDownCircleIcon } from "lucide-react";
-import { useMediaQuery } from "react-responsive";
 
 export function FormSection() {
+    const sectionRef = useRef();
     const contactPicRef = useRef();
 
-    const isMobile = useMediaQuery({ maxWidth: 767 });
-
     useGSAP(() => {
-        const start = isMobile ? '50% bottom' : 'top bottom';
-        gsap.from(contactPicRef.current, {
-            scrollTrigger: {
-                trigger: contactPicRef.current,
-                start: start
-            },
-            width: 0,
-            duration: 1.2,
-            ease: 'circ.inOut'
-        })
-    })
+        const mm = gsap.matchMedia();
+
+        mm.add({
+            isDesktop: "(min-width: 768px)",
+            isMobile: "(max-width: 767px)"
+        }, (context) => {
+            const { isMobile } = context.conditions;
+
+            gsap.from(contactPicRef.current, {
+                scrollTrigger: {
+                    trigger: contactPicRef.current,
+                    start: isMobile ? '50% bottom' : 'top bottom'
+                },
+                width: 0,
+                duration: 1.2,
+                ease: 'circ.inOut'
+            });
+        });
+    }, { scope: sectionRef });
 
     return (
-        <section className="flex flex-col md:flex-row gap-16 md:gap-8">
+        <section className="flex flex-col md:flex-row gap-16 md:gap-8" ref={sectionRef}>
             <div className="flex-1 flex flex-col md:flex-row gap-8">
                 <div className="w-50 h-50 overflow-hidden">
                     <img src={ContactPic} alt="" className="w-full object-cover aspect-square" ref={contactPicRef} />
@@ -49,5 +55,5 @@ export function FormSection() {
                 <ContactForm />
             </div>
         </section>
-    )
+    );
 }

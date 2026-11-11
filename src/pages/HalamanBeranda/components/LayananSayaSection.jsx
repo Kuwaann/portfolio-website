@@ -3,7 +3,6 @@ import gsap from 'gsap'
 import { SplitText } from 'gsap/all';
 import { SkillsetCard } from '../../../components/HalamanBeranda/SkillsetCard';
 import { skillsets } from '../../../../constants';
-import { useMediaQuery } from 'react-responsive';
 import { useRef } from 'react';
 
 export function LayananSayaSection() {
@@ -11,30 +10,40 @@ export function LayananSayaSection() {
     const titleRef = useRef();
     const subtitleRef = useRef();
 
-    const isMobile = useMediaQuery({ maxWidth: 767 });
-
     useGSAP(() => {
-        const titleSplit = SplitText.create(titleRef.current, { type: "lines", mask: "lines" });
-        const subtitleSplit = SplitText.create(subtitleRef.current, { type: "lines", mask: "lines" });
+        const mm = gsap.matchMedia();
 
-        gsap.from(titleSplit.lines, {
-            scrollTrigger: {
-                trigger: titleRef.current,
-                start: 'top 65%',
-            },
-            yPercent: 100,
-            stagger: 0.1
-        })
+        mm.add({
+            isDesktop: "(min-width: 768px)",
+            isMobile: "(max-width: 767px)"
+        }, () => {
+            const titleSplit = SplitText.create(titleRef.current, { type: "lines", mask: "lines" });
+            const subtitleSplit = SplitText.create(subtitleRef.current, { type: "lines", mask: "lines" });
 
-        gsap.from(subtitleSplit.lines, {
-            scrollTrigger: {
-                trigger: subtitleRef.current,
-                start: 'top 65%',
-            },
-            yPercent: 100,
-            stagger: 0.1
+            gsap.from(titleSplit.lines, {
+                scrollTrigger: {
+                    trigger: titleRef.current,
+                    start: 'top 65%',
+                },
+                yPercent: 100,
+                stagger: 0.1
+            })
+
+            gsap.from(subtitleSplit.lines, {
+                scrollTrigger: {
+                    trigger: subtitleRef.current,
+                    start: 'top 65%',
+                },
+                yPercent: 100,
+                stagger: 0.1
+            })
+
+            return () => {
+                titleSplit.revert();
+                subtitleSplit.revert();
+            }
         })
-    }, { scope: sectionRef, dependencies: [isMobile] })
+    }, { scope: sectionRef })
 
     return (
         <section className="flex flex-col gap-16 overflow-hidden cursor-default" ref={sectionRef}>

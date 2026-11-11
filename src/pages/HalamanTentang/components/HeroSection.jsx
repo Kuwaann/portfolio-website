@@ -1,12 +1,10 @@
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
-import { useMediaQuery } from "react-responsive";
 import gsap from "gsap";
 import AboutPic from "../../../assets/HalamanKontak/about-picture.jpeg";
 
 export function HeroSection() {
-    const isMobile = useMediaQuery({ maxWidth: 767 });
-
+    const sectionRef = useRef();
     const containerRef = useRef();
     const dummyDivRef = useRef();
     const imgContainerRef = useRef();
@@ -14,60 +12,69 @@ export function HeroSection() {
     const emirRef = useRef();
     const rivaldyRef = useRef();
 
-
     useGSAP(() => {
-        const dummyRect = dummyDivRef.current.getBoundingClientRect();
-        const xDummyCenter = dummyRect.left + (dummyRect.width / 2);
-        const xWindowCenter = window.innerWidth / 2;
-        const shiftX = xWindowCenter - xDummyCenter
+        const mm = gsap.matchMedia();
 
-        const tl = gsap.timeline({
-            defaults: {
-                ease: 'circ.inOut',
-                duration: 1.8
-            }
-        });
+        mm.add({
+            isDesktop: "(min-width: 768px)",
+            isMobile: "(max-width: 767px)"
+        }, (context) => {
+            const { isMobile } = context.conditions;
 
-        gsap.set(containerRef.current, {
-            x: shiftX
-        })
-        tl.fromTo(emirRef.current, {
-            xPercent: -160,
-        }, {
-            xPercent: 0,
-            x: isMobile ? -16 : -32
-        }, 0)
-            .fromTo(rivaldyRef.current, {
-                xPercent: 150,
+            const dummyRect = dummyDivRef.current.getBoundingClientRect();
+            const xDummyCenter = dummyRect.left + (dummyRect.width / 2);
+            const xWindowCenter = window.innerWidth / 2;
+            const shiftX = xWindowCenter - xDummyCenter;
+
+            const tl = gsap.timeline({
+                defaults: {
+                    ease: 'circ.inOut',
+                    duration: 1.8
+                }
+            });
+
+            gsap.set(containerRef.current, {
+                x: shiftX
+            });
+
+            tl.fromTo(emirRef.current, {
+                xPercent: -160,
             }, {
                 xPercent: 0,
-                x: isMobile ? 8 : 16
+                x: isMobile ? -16 : -32
             }, 0)
-            .fromTo(imgContainerRef.current, {
-                borderRadius: '0px',
-                width: '100vw',
-                height: '100vh'
-            }, {
-                width: isMobile ? "64px" :"180px",
-                height: isMobile ? "64px" :"180px",
-                borderRadius: '8px',
-            }, 0)
-            .fromTo(imgRef.current, {
-                scale: 2,
-            }, {
-                scale: 1,
-            }, 0)
-            .to(containerRef.current, {
-                x: 0,
-            }, 2)
-            .to(imgContainerRef.current, {
-                x: 0 - shiftX,
-            }, '<');
-
-    });
+                .fromTo(rivaldyRef.current, {
+                    xPercent: 150,
+                }, {
+                    xPercent: 0,
+                    x: isMobile ? 8 : 16
+                }, 0)
+                .fromTo(imgContainerRef.current, {
+                    borderRadius: '0px',
+                    width: '100vw',
+                    height: '100vh'
+                }, {
+                    width: isMobile ? "64px" : "180px",
+                    height: isMobile ? "64px" : "180px",
+                    borderRadius: '8px',
+                }, 0)
+                .fromTo(imgRef.current, {
+                    scale: 2,
+                }, {
+                    scale: 1,
+                }, 0)
+                .to(containerRef.current, {
+                    x: 0,
+                }, 2)
+                .to(imgContainerRef.current, {
+                    x: 0 - shiftX,
+                }, '<');
+        });
+    }, { scope: sectionRef });
 
     return (
         <section
+            ref={sectionRef}
             className="w-full h-screen sticky top-0 flex justify-center items-center overflow-hidden bg-black text-white"
         >
             <div className="flex items-center justify-center select-none" ref={containerRef}>
