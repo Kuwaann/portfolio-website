@@ -1,9 +1,12 @@
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
+import { useMediaQuery } from "react-responsive";
 import gsap from "gsap";
 import AboutPic from "../../../assets/HalamanKontak/about-picture.jpeg";
 
 export function HeroSection() {
+    const isMobile = useMediaQuery({ maxWidth: 767 });
+
     const containerRef = useRef();
     const dummyDivRef = useRef();
     const imgContainerRef = useRef();
@@ -32,21 +35,21 @@ export function HeroSection() {
             xPercent: -160,
         }, {
             xPercent: 0,
-            x: -32
+            x: isMobile ? -16 : -32
         }, 0)
             .fromTo(rivaldyRef.current, {
                 xPercent: 150,
             }, {
                 xPercent: 0,
-                x: 16
+                x: isMobile ? 8 : 16
             }, 0)
             .fromTo(imgContainerRef.current, {
                 borderRadius: '0px',
                 width: '100vw',
                 height: '100vh'
             }, {
-                width: "180px",
-                height: "180px",
+                width: isMobile ? "64px" :"180px",
+                height: isMobile ? "64px" :"180px",
                 borderRadius: '8px',
             }, 0)
             .fromTo(imgRef.current, {
@@ -70,17 +73,17 @@ export function HeroSection() {
             <div className="flex items-center justify-center select-none" ref={containerRef}>
                 <span
                     ref={emirRef}
-                    className="text-[256px] leading-none"
+                    className="text-[64px] md:text-[256px] leading-none"
                 >
                     emir
                 </span>
-                <div className="w-45 aspect-square" ref={dummyDivRef}>
+                <div className="w-16 md:w-45 aspect-square" ref={dummyDivRef}>
 
                 </div>
 
                 <span
                     ref={rivaldyRef}
-                    className="text-[256px] leading-none inline-block"
+                    className="text-[64px] md:text-[256px] leading-none inline-block"
                 >
                     rivaldy<span className="text-white/50">©</span>
                 </span>
